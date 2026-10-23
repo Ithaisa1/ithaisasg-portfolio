@@ -33,16 +33,18 @@ const { Content } = await render(proyecto);
       <div class="actions">
         {
           p.demo && (
-            <a class="btn primary" href={p.demo} rel="noopener">
+            <a class="btn primary" href={p.demo} target="_blank" rel="noopener">
               Ver la web
               {p.demoNota && <span class="small">({p.demoNota.toLowerCase()})</span>}
+              <span class="visually-hidden"> (se abre en una pestaña nueva)</span>
             </a>
           )
         }
         {
           p.codigo && (
-            <a class="btn" href={p.codigo} rel="noopener">
+            <a class="btn" href={p.codigo} target="_blank" rel="noopener">
               Ver el código
+              <span class="visually-hidden"> (se abre en una pestaña nueva)</span>
             </a>
           )
         }
@@ -77,6 +79,20 @@ const { Content } = await render(proyecto);
       <a href={`/proyectos/${siguiente.id}/`}>{siguiente.data.titulo} →</a>
     </nav>
   </article>
+
+  <script>
+    // En el texto de la ficha, los enlaces a otras webs y a las demos se abren en una pestaña nueva
+    document.querySelectorAll<HTMLAnchorElement>('.prose a[href]').forEach((a) => {
+      const href = a.getAttribute('href') ?? '';
+      if (!/^https?:\/\//.test(href) && !href.startsWith('/demos/')) return;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const aviso = document.createElement('span');
+      aviso.className = 'visually-hidden';
+      aviso.textContent = ' (se abre en una pestaña nueva)';
+      a.append(aviso);
+    });
+  </script>
 </Base>
 
 <style>
