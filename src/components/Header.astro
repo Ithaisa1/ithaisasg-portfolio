@@ -1,31 +1,46 @@
 ---
-// Cabecera fija con el nombre y la navegación, sobre la banda oscura de la marca.
-// Los enlaces empiezan por «/» para que funcionen también desde las fichas de proyecto.
+// Cabecera fija con el nombre, la navegación y el cambio de idioma, sobre la banda oscura de la marca.
+// Los enlaces llevan la ruta de la portada para que funcionen también desde las fichas de proyecto.
 import Logo from './Logo.astro';
+import { inicio, t as textos, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  otroIdioma: string; // Esta misma página en el otro idioma
+}
+const { lang, otroIdioma } = Astro.props;
+const t = textos(lang);
+const base = inicio(lang);
 
 const enlaces = [
-  { href: '/#proyectos', texto: 'Proyectos' },
-  { href: '/#experiencia', texto: 'Experiencia' },
-  { href: '/#habilidades', texto: 'Habilidades', opcional: true },
-  { href: '/#contacto', texto: 'Contacto' },
+  { href: `${base}#proyectos`, texto: t.nav.proyectos },
+  { href: `${base}#experiencia`, texto: t.nav.experiencia, estrecho: true },
+  { href: `${base}#habilidades`, texto: t.nav.habilidades, opcional: true },
+  { href: `${base}#contacto`, texto: t.nav.contacto },
 ];
 ---
 
 <header class="top">
   <div class="wrap bar">
-    <a class="mark" href="/" aria-label="Ithaisa Sánchez, ir al inicio">
+    <a class="mark" href={base} aria-label={t.irInicio}>
       <Logo height={30} />
       <span class="name" aria-hidden="true">Ithaisa Sánchez</span>
     </a>
-    <nav aria-label="Principal">
+    <nav aria-label={t.navPrincipal}>
       <ul>
         {
           enlaces.map((e) => (
-            <li class:list={{ opcional: e.opcional }}>
+            <li class:list={{ opcional: e.opcional, estrecho: e.estrecho }}>
               <a href={e.href}>{e.texto}</a>
             </li>
           ))
         }
+        <li>
+          <a class="idioma" href={otroIdioma} hreflang={t.otroIdioma.lang} lang={t.otroIdioma.lang}>
+            <span aria-hidden="true">{t.otroIdioma.corto}</span>
+            <span class="visually-hidden">{t.otroIdioma.largo}</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -87,6 +102,14 @@ const enlaces = [
     color: var(--band-ink);
     background: var(--band-line);
   }
+  /* Cambio de idioma: una pastilla pequeña al final del menú */
+  nav a.idioma {
+    margin-left: 4px;
+    font-family: var(--f-mono);
+    font-weight: 700;
+    color: var(--band-ink);
+    border: 1px solid var(--band-line);
+  }
   .top :focus-visible {
     outline-color: var(--band-accent);
   }
@@ -96,6 +119,26 @@ const enlaces = [
     }
     nav a {
       padding: 10px 6px;
+    }
+  }
+  /* Móviles estrechos: menú más compacto para que quepa también el cambio de idioma */
+  @media (max-width: 400px) {
+    ul {
+      gap: 0;
+    }
+    nav a {
+      padding: 10px 5px;
+      font-size: 0.86rem;
+    }
+    nav a.idioma {
+      margin-left: 2px;
+      padding: 9px 6px;
+    }
+  }
+  /* Pantallas muy pequeñas (320 px): se quita también «Experiencia» del menú */
+  @media (max-width: 345px) {
+    .estrecho {
+      display: none;
     }
   }
 </style>

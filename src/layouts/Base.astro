@@ -3,33 +3,41 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { perfil } from '../data/perfil';
+import { getDatos } from '../data/perfil';
+import { t as textos, type Lang } from '../i18n';
 
 interface Props {
+  lang?: Lang;
   title?: string; // Si no se indica, se usa el nombre y el título profesional
   description?: string;
-  image?: string; // Imagen para compartir en redes (ruta dentro de public/)
+  image?: string; // Imagen para compartir en redes (ruta de la web; por defecto /og.png)
+  // La misma página en cada idioma, para el cambio de idioma y para los buscadores
+  alternos?: { es: string; en: string };
 }
 
-const {
-  title,
-  description = `${perfil.nombre}, ${perfil.titulo.toLowerCase()} junior en ${perfil.ubicacion}. ${perfil.subtitulo}. Proyectos, experiencia y contacto.`,
-  image = '/og.png',
-} = Astro.props;
+const { lang = 'es', title, image = '/og.png', alternos = { es: '/', en: '/en/' } } = Astro.props;
+const t = textos(lang);
+const { perfil } = getDatos(lang);
+const description =
+  Astro.props.description ?? t.descripcion(perfil.nombre, perfil.titulo, perfil.ubicacion, perfil.subtitulo);
 
 const fullTitle = title ? `${title} · ${perfil.nombre}` : `${perfil.nombre} · ${perfil.titulo}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+const otroIdioma = lang === 'es' ? alternos.en : alternos.es;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={new URL(alternos.es, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(alternos.en, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(alternos.es, Astro.site)} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -38,7 +46,7 @@ const ogImage = new URL(image, Astro.site);
 
     <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp…) -->
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={t.locale} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -47,11 +55,14 @@ const ogImage = new URL(image, Astro.site);
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- Contador de visitas (GoatCounter): sin cookies ni datos personales. Panel: https://ithaisasg.goatcounter.com -->
+    <script is:inline data-goatcounter="https://ithaisasg.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <Header />
+    <a class="skip-link" href="#contenido">{t.saltar}</a>
+    <Header lang={lang} otroIdioma={otroIdioma} />
     <main id="contenido" tabindex="-1">
       <slot />
     </main>

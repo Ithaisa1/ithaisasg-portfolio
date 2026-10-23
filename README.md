@@ -22,12 +22,16 @@ Portfolio profesional como desarrolladora frontend. Web estática hecha con [Ast
 | Archivo o carpeta              | Qué contiene                                                                        |
 | ------------------------------ | ----------------------------------------------------------------------------------- |
 | `src/data/*.json`              | Tus datos: presentación y contacto, experiencia, formación, habilidades e idiomas   |
+| `src/data/en/*.json`           | Los mismos datos en inglés (versión `/en/`)                                         |
+| `src/content/projects-en/*.md` | Traducción al inglés de cada proyecto (mismo nombre de archivo que en español)      |
+| `src/i18n.ts`                  | Textos fijos de la web (menú, botones, títulos) en español e inglés                 |
 | `src/data/perfil.ts`           | Reúne los `.json` y les da tipo. No hace falta tocarlo para cambiar contenido       |
 | `public/admin/`                | El panel de contenido (Sveltia CMS) y sus formularios (`config.yml`)                |
 | `src/content/proyectos/*.md`   | Un archivo por proyecto. El texto de la ficha se escribe en Markdown                |
 | `src/assets/proyectos/`        | Capturas de los proyectos (Astro las convierte a WebP y las optimiza)               |
 | `src/content.config.ts`        | Qué campos debe tener cada proyecto. Si falta uno, el build falla y dice cuál       |
-| `src/pages/`                   | Páginas: portada, ficha de proyecto y 404                                           |
+| `src/pages/`                   | Rutas: `/`, `/proyectos/…`, `/en/`, `/en/projects/…` y 404                          |
+| `src/components/Pagina*.astro` | Portada y ficha de proyecto, compartidas por los dos idiomas                        |
 | `src/components/`, `src/layouts/` | Piezas reutilizables: cabecera, pie, tarjeta de proyecto, botón de copiar        |
 | `src/styles/global.css`        | Colores (modo claro y oscuro), tipografía, botones y etiquetas                      |
 | `public/`                      | Archivos que se sirven tal cual: favicon, imagen para redes, robots.txt y el CV     |
@@ -72,4 +76,7 @@ Colores: tinta `#13232B`, verde azulado `#0A716C`, naranja `#E2643B`, fondo clar
 - **Fuentes alojadas en la propia web** (paquetes `@fontsource-variable`), sin Google Fonts: más rápido y sin enviar datos de las visitas a terceros.
 - **Habilidades por evidencia, sin porcentajes:** «En mis proyectos», «En el trabajo, en equipo», «Formación práctica» y «Diseño y SEO».
 - **Panel sin servidor ni base de datos:** Sveltia CMS guarda cada cambio como un commit en GitHub. El contenido sigue siendo archivos de texto con historial.
+- **Dos idiomas:** español en `/` e inglés en `/en/`. Si un proyecto no tiene traducción, la versión inglesa muestra el texto en español.
+- **Imagen para redes por proyecto:** se genera sola al compilar, recortando la captura a 1200 × 630.
+- **Contador de visitas con GoatCounter:** sin cookies ni datos personales, así que no hace falta aviso de cookies. Panel en https://ithaisasg.goatcounter.com.
 - **Sin formulario de contacto:** email y teléfono con botón de copiar, sin servicios externos.

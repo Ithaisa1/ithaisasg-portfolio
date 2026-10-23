@@ -1,0 +1,39 @@
+{
+  "nombre": "Ithaisa Sánchez González",
+  "titulo": "Frontend Developer",
+  "subtitulo": "Web interfaces, UX/UI and digital experiences",
+  "ubicacion": "Gran Canaria, Spain",
+  "disponibilidad": "Available from 7 January 2027",
+  "presentacion": "Junior web developer with technical training (a two-year web development degree and a full stack bootcamp) and work experience in web companies. I build interfaces with HTML, CSS, JavaScript, TypeScript, Astro and React, making sure they are accessible and easy to use.",
+  "destacados": [
+    {
+      "etiqueta": "Now",
+      "texto": "Web developer at Qraneos",
+      "detalle": "Working in a team with Git, GitLab and Jira"
+    },
+    {
+      "etiqueta": "Education",
+      "texto": "Web Application Development degree",
+      "detalle": "Plus a Full Stack + AI bootcamp (Ironhack)"
+    },
+    {
+      "etiqueta": "Projects",
+      "texto": "5 projects with a live demo",
+      "detalle": "Astro, React, TypeScript and Node.js"
+    }
+  ],
+  "sobreMiTitulo": "Training and experience in web development.",
+  "sobreMi": [
+    "My first web job was in 2019, maintaining pages and content at Wonka Producciones, the same year I earned the official certificate in Web Application Development. I then trained as a Microcomputer Systems and Networks Technician and as a Higher Technician in Web Application Development.",
+    "I have worked with WordPress, Divi, Elementor, SEO and content at Web Las Palmas and Etnonautas, and in 2026 I completed Ironhack's Full Stack + AI bootcamp with FULP. I now work at Qraneos on a work-study training contract: coding katas, web scraping with TypeScript and technical documentation, in a team using Git, GitLab and Jira.",
+    "I also have training and experience in graphic design, which helps me take care of the visual side of interfaces."
+  ],
+  "busco": "I have technical training and experience in web development companies, and I am looking for a junior frontend developer role in a team where design and user experience matter.",
+  "contacto": {
+    "email": "ithaisasanchezgonzalez@gmail.com",
+    "telefono": "+34 672 075 340",
+    "linkedin": "https://www.linkedin.com/in/ithaisa-sg/",
+    "github": "https://github.com/Ithaisa1",
+    "cv": "/cv-ithaisa-sanchez.pdf"
+  }
+}

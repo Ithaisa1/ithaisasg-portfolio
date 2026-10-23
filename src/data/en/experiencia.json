@@ -1,0 +1,57 @@
+{
+  "puestos": [
+    {
+      "fechas": "Jul 2026 – Jan 2027",
+      "puesto": "Web developer",
+      "empresa": "Qraneos",
+      "tipo": "Work-study training contract",
+      "actual": true,
+      "tareas": [
+        "Coding katas in JavaScript.",
+        "Web scraping with TypeScript.",
+        "Technical documentation and support scripts for a team project.",
+        "Teamwork with Git and GitLab (branches, commits and merge requests) and task tracking in Jira."
+      ]
+    },
+    {
+      "fechas": "Apr – Sep 2025",
+      "puesto": "Web content and SEO developer",
+      "empresa": "Etnonautas",
+      "tipo": "Diginnova programme placement",
+      "tareas": [
+        "Maintenance of WordPress websites with Divi and Elementor, and management of translated content.",
+        "Optimised content creation and on-page SEO with SEMrush.",
+        "Management of Google Business Profile listings.",
+        "Kit Digital projects (a Spanish digitalisation grant): document management and compliance checks.",
+        "Support with digital advertising and online visibility strategies."
+      ]
+    },
+    {
+      "fechas": "Mar – May 2024",
+      "puesto": "Web developer",
+      "empresa": "Web Las Palmas",
+      "tipo": "Vocational training internship",
+      "tareas": [
+        "Website maintenance and SEO-optimised content creation.",
+        "Support on Kit Digital projects."
+      ]
+    },
+    {
+      "fechas": "2022",
+      "puesto": "Graphic designer",
+      "empresa": "Gráficas Abemak",
+      "tareas": [
+        "Posters, logos and digital content.",
+        "Print-ready artwork with GIMP and CorelDRAW."
+      ]
+    },
+    {
+      "fechas": "2019",
+      "puesto": "Web page designer",
+      "empresa": "Wonka Producciones",
+      "tareas": [
+        "Website maintenance and digital content editing."
+      ]
+    }
+  ]
+}

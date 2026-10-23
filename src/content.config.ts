@@ -27,4 +27,20 @@ const proyectos = defineCollection({
     }),
 });
 
-export const collections = { proyectos };
+// Traducción al inglés de cada proyecto: solo los textos, con el mismo nombre de archivo
+// que en src/content/proyectos/. Imágenes, enlaces, colores y orden salen de la versión en español.
+const projectsEn = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/projects-en' }),
+  schema: z.object({
+    titulo: z.string(),
+    resumen: z.string(),
+    tipo: z.string(),
+    fecha: z.string(),
+    estado: z.string(),
+    demoNota: z.string().optional(),
+    codigoNota: z.string().optional(),
+    imagenAlt: z.string(),
+  }),
+});
+
+export const collections = { proyectos, projectsEn };

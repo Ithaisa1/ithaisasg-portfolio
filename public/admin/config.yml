@@ -203,3 +203,146 @@ collections:
             fields:
               - { name: idioma, label: Idioma, widget: string }
               - { name: nivel, label: Nivel, widget: string }
+
+  # ---------- Proyectos en inglés: solo los textos ----------
+  # Imágenes, enlaces, colores y orden se toman de la versión en español.
+  - name: projects-en
+    label: Proyectos (inglés)
+    label_singular: Traducción de proyecto
+    folder: src/content/projects-en
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: '{{archivo}}'
+    identifier_field: titulo
+    summary: '{{titulo}}'
+    fields:
+      - name: archivo
+        label: Nombre del archivo
+        widget: string
+        required: false
+        hint: Solo al crear una traducción nueva. Escribe el mismo nombre que tiene el proyecto en español, por ejemplo «canarias-facil».
+      - { name: titulo, label: Título, widget: string }
+      - { name: resumen, label: Resumen, widget: text }
+      - { name: tipo, label: Tipo, widget: string, hint: 'Por ejemplo: «Personal project».' }
+      - { name: fecha, label: Fecha, widget: string, hint: 'Por ejemplo: «October 2026».' }
+      - { name: estado, label: Estado, widget: string }
+      - { name: demoNota, label: Nota del enlace a la web, widget: string, required: false }
+      - { name: codigoNota, label: Nota sobre el código, widget: string, required: false }
+      - { name: imagenAlt, label: Descripción de la captura, widget: text }
+      - { name: body, label: Ficha del proyecto, widget: markdown }
+
+  # ---------- Datos personales en inglés (versión /en/) ----------
+  - name: perfil-en
+    label: Mis datos (inglés)
+    files:
+      - name: general-en
+        label: Presentación y contacto
+        file: src/data/en/perfil.json
+        format: json
+        fields:
+          - { name: nombre, label: Nombre, widget: string }
+          - { name: titulo, label: Título, widget: string }
+          - { name: subtitulo, label: Subtítulo, widget: string }
+          - { name: ubicacion, label: Ubicación, widget: string }
+          - { name: disponibilidad, label: Disponibilidad, widget: string, hint: 'Empieza por «Disponible…». También se usa en el bloque de contacto.' }
+          - { name: presentacion, label: Presentación, widget: text }
+          - name: destacados
+            label: Datos destacados (debajo de la presentación)
+            widget: list
+            summary: '{{etiqueta}}: {{texto}}'
+            fields:
+              - { name: etiqueta, label: Etiqueta, widget: string }
+              - { name: texto, label: Texto, widget: string }
+              - { name: detalle, label: Detalle, widget: string }
+          - { name: sobreMiTitulo, label: Título de «Sobre mí», widget: string }
+          - name: sobreMi
+            label: Sobre mí (párrafos)
+            widget: list
+            field: { name: parrafo, label: Párrafo, widget: text }
+          - { name: busco, label: Texto del bloque de contacto, widget: text }
+          - name: contacto
+            label: Contacto
+            widget: object
+            fields:
+              - { name: email, label: Email, widget: string }
+              - { name: telefono, label: Teléfono, widget: string }
+              - { name: linkedin, label: LinkedIn, widget: string }
+              - { name: github, label: GitHub, widget: string }
+              - name: cv
+                label: CV en PDF
+                widget: file
+                required: false
+                accept: application/pdf
+                hint: Si subes un PDF, aparece el botón «Descargar» en el contacto.
+
+      - name: experiencia-en
+        label: Experiencia
+        file: src/data/en/experiencia.json
+        format: json
+        fields:
+          - name: puestos
+            label: Puestos (el más reciente primero)
+            widget: list
+            summary: '{{fechas}} · {{puesto}} en {{empresa}}'
+            fields:
+              - { name: fechas, label: Fechas, widget: string, hint: 'Por ejemplo: «abr – sep 2025».' }
+              - { name: puesto, label: Puesto, widget: string }
+              - { name: empresa, label: Empresa, widget: string }
+              - { name: tipo, label: Tipo de contrato, widget: string, required: false, hint: 'Por ejemplo: «Prácticas formativas».' }
+              - { name: actual, label: Es mi trabajo actual, widget: boolean, required: false, default: false }
+              - name: tareas
+                label: Tareas
+                widget: list
+                field: { name: tarea, label: Tarea, widget: text }
+
+      - name: formacion-en
+        label: Formación
+        file: src/data/en/formacion.json
+        format: json
+        fields:
+          - name: grupos
+            label: Grupos
+            widget: list
+            summary: '{{grupo}}'
+            fields:
+              - { name: grupo, label: Nombre del grupo, widget: string }
+              - name: items
+                label: Estudios
+                widget: list
+                summary: '{{titulo}}'
+                fields:
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: centro, label: Centro, widget: string }
+                  - { name: fechas, label: Fechas, widget: string, required: false }
+
+      - name: habilidades-en
+        label: Habilidades
+        file: src/data/en/habilidades.json
+        format: json
+        fields:
+          - name: grupos
+            label: Grupos
+            widget: list
+            summary: '{{grupo}}'
+            fields:
+              - { name: grupo, label: Nombre del grupo, widget: string }
+              - { name: explicacion, label: Explicación, widget: string }
+              - name: items
+                label: Herramientas
+                widget: list
+                field: { name: item, label: Herramienta, widget: string }
+
+      - name: idiomas-en
+        label: Idiomas
+        file: src/data/en/idiomas.json
+        format: json
+        fields:
+          - name: idiomas-en
+            label: Idiomas
+            widget: list
+            summary: '{{idioma}} ({{nivel}})'
+            fields:
+              - { name: idioma, label: Idioma, widget: string }
+              - { name: nivel, label: Nivel, widget: string }

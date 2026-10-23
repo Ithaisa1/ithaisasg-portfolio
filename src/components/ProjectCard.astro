@@ -1,15 +1,18 @@
 ---
 // Tarjeta de un proyecto en la portada. Toda la tarjeta lleva a su ficha.
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
+import type { Proyecto } from '../data/proyectos';
+import { fichaUrl, t as textos, type Lang } from '../i18n';
 
 interface Props {
-  proyecto: CollectionEntry<'proyectos'>;
+  proyecto: Proyecto;
+  lang: Lang;
 }
 
-const { proyecto } = Astro.props;
+const { proyecto, lang } = Astro.props;
+const t = textos(lang);
 const p = proyecto.data;
-const ficha = `/proyectos/${proyecto.id}/`;
+const ficha = fichaUrl(lang, proyecto.id);
 ---
 
 <article class:list={['card', { destacado: p.destacado }]} style={`--proj: ${p.color}`}>
@@ -25,10 +28,10 @@ const ficha = `/proyectos/${proyecto.id}/`;
     <p class="meta"><span>{p.tipo}</span><span>{p.fecha}</span></p>
     <h3><a href={ficha}>{p.titulo}</a></h3>
     <p class="resumen">{p.resumen}</p>
-    <ul class="tags" aria-label="Tecnologías">
+    <ul class="tags" aria-label={t.tarjeta.tecnologias}>
       {p.tecnologias.slice(0, 6).map((t) => <li>{t}</li>)}
     </ul>
-    <p class="more" aria-hidden="true">Ver ficha del proyecto →</p>
+    <p class="more" aria-hidden="true">{t.tarjeta.verFicha}</p>
   </div>
 </article>
 

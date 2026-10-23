@@ -1,0 +1,24 @@
+{
+  "grupos": [
+    {
+      "grupo": "In my projects",
+      "explicacion": "I have used these to build and publish the projects on this site.",
+      "items": ["HTML5", "CSS3", "JavaScript", "TypeScript", "Astro", "React", "Tailwind CSS", "Git", "GitHub", "Vercel"]
+    },
+    {
+      "grupo": "At work, in a team",
+      "explicacion": "I have used these in companies, with colleagues and real tasks.",
+      "items": ["Git", "GitLab", "Jira", "WordPress", "Divi", "Elementor", "Trello", "Toggl", "Slack"]
+    },
+    {
+      "grupo": "Hands-on training",
+      "explicacion": "I have practised these in the bootcamp and in courses.",
+      "items": ["Node.js", "Express", "PostgreSQL", "Python", "FastAPI", "Testing (Jest, Vitest, Playwright)", "LangChain and basic RAG", "n8n", "Symfony"]
+    },
+    {
+      "grupo": "Design and SEO",
+      "explicacion": "My earlier experience, which I now apply to interface design.",
+      "items": ["Photoshop", "GIMP", "CorelDRAW", "Canva", "SEMrush", "On-page SEO", "Google Business Profile"]
+    }
+  ]
+}

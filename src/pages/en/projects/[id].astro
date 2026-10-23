@@ -1,0 +1,17 @@
+---
+// Project pages in English. The content is in src/components/PaginaProyecto.astro.
+import PaginaProyecto from '../../../components/PaginaProyecto.astro';
+import { getProyectos } from '../../../data/proyectos';
+
+export async function getStaticPaths() {
+  const proyectos = await getProyectos('en');
+  return proyectos.map((proyecto, i) => ({
+    params: { id: proyecto.id },
+    props: { proyecto, siguiente: proyectos[(i + 1) % proyectos.length] },
+  }));
+}
+
+const { proyecto, siguiente } = Astro.props;
+---
+
+<PaginaProyecto lang="en" proyecto={proyecto} siguiente={siguiente} />

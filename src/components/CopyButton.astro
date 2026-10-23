@@ -1,13 +1,26 @@
 ---
 // Botón «Copiar». Si el navegador no permite copiar, selecciona el texto para copiarlo a mano.
+import { t as textos, type Lang } from '../i18n';
+
 interface Props {
   value: string;
   label: string; // Texto para lectores de pantalla, por ejemplo «Copiar email»
+  lang: Lang;
 }
-const { value, label } = Astro.props;
+const { value, label, lang } = Astro.props;
+const t = textos(lang).contacto;
 ---
 
-<button type="button" class="copy" data-copy={value} aria-label={label}>Copiar</button>
+<button
+  type="button"
+  class="copy"
+  data-copy={value}
+  data-copiar={t.copiar}
+  data-copiado={t.copiado}
+  data-aviso={t.copiadoAviso}
+  data-manual={t.copiaManual}
+  aria-label={label}>{t.copiar}</button
+>
 <span class="visually-hidden" role="status" aria-live="polite"></span>
 
 <style>
@@ -30,10 +43,10 @@ const { value, label } = Astro.props;
       const status = btn.nextElementSibling as HTMLElement | null;
       try {
         await navigator.clipboard.writeText(value);
-        btn.textContent = 'Copiado';
-        if (status) status.textContent = 'Copiado al portapapeles';
+        btn.textContent = btn.dataset.copiado ?? '';
+        if (status) status.textContent = btn.dataset.aviso ?? '';
         setTimeout(() => {
-          btn.textContent = 'Copiar';
+          btn.textContent = btn.dataset.copiar ?? '';
           if (status) status.textContent = '';
         }, 1800);
       } catch {
@@ -46,7 +59,7 @@ const { value, label } = Astro.props;
           sel?.removeAllRanges();
           sel?.addRange(range);
         }
-        btn.textContent = 'Selecciona y copia';
+        btn.textContent = btn.dataset.manual ?? '';
       }
     });
   });

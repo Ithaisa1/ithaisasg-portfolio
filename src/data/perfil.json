@@ -4,7 +4,7 @@
   "subtitulo": "Interfaces web, UX/UI y experiencias digitales",
   "ubicacion": "Gran Canaria",
   "disponibilidad": "Disponible desde el 7 de enero de 2027",
-  "presentacion": "Desarrolladora web junior con formación técnica (DAW y bootcamp full stack) y experiencia en empresas del sector. Construyo interfaces con HTML, CSS, JavaScript, Astro y React, cuidando que sean accesibles y fáciles de usar.",
+  "presentacion": "Desarrolladora web junior con formación técnica (DAW y bootcamp full stack) y experiencia en empresas del sector. Construyo interfaces con HTML, CSS, JavaScript, TypeScript, Astro y React, cuidando que sean accesibles y fáciles de usar.",
   "destacados": [
     {
       "etiqueta": "Ahora",
@@ -19,7 +19,7 @@
     {
       "etiqueta": "Proyectos",
       "texto": "5 proyectos con demo",
-      "detalle": "Astro, React y Node.js, en Vercel"
+      "detalle": "Astro, React, TypeScript y Node.js"
     }
   ],
   "sobreMiTitulo": "Formación y experiencia en desarrollo web.",
@@ -33,6 +33,7 @@
     "email": "ithaisasanchezgonzalez@gmail.com",
     "telefono": "+34 672 075 340",
     "linkedin": "https://www.linkedin.com/in/ithaisa-sg/",
-    "github": "https://github.com/Ithaisa1"
+    "github": "https://github.com/Ithaisa1",
+    "cv": "/cv-ithaisa-sanchez.pdf"
   }
 }

@@ -1,0 +1,59 @@
+{
+  "grupos": [
+    {
+      "grupo": "Degrees",
+      "items": [
+        {
+          "titulo": "Higher Technician in Web Application Development (DAW)",
+          "centro": "IES Ana Luisa Benítez · two-year Spanish vocational degree",
+          "fechas": "2022 – 2024"
+        },
+        {
+          "titulo": "Technician in Microcomputer Systems and Networks (SMR)",
+          "centro": "IES Ana Luisa Benítez",
+          "fechas": "2019 – 2021"
+        }
+      ]
+    },
+    {
+      "grupo": "Programmes and certificates",
+      "items": [
+        {
+          "titulo": "Full Stack Web Development + AI Bootcamp",
+          "centro": "Ironhack · FULP Coding School",
+          "fechas": "2026"
+        },
+        {
+          "titulo": "Diginnova programme (180 h)",
+          "centro": "FULP · University of Las Palmas de Gran Canaria",
+          "fechas": "Oct 2024 – Apr 2025"
+        },
+        {
+          "titulo": "Graphic Product Design",
+          "centro": "Official professional certificate, level 3",
+          "fechas": "2023"
+        },
+        {
+          "titulo": "Web Application Development",
+          "centro": "Official professional certificate, level 3",
+          "fechas": "2019"
+        }
+      ]
+    },
+    {
+      "grupo": "Courses",
+      "items": [
+        {
+          "titulo": "Python programming (100 h)",
+          "centro": "CICCA",
+          "fechas": ""
+        },
+        {
+          "titulo": "Symfony, PHP framework (150 h)",
+          "centro": "CIP",
+          "fechas": ""
+        }
+      ]
+    }
+  ]
+}
