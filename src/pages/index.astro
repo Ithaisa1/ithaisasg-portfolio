@@ -1,0 +1,800 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CopyButton from '../components/CopyButton.astro';
+import { perfil, experiencia, formacion, habilidades, idiomas } from '../data/perfil';
+
+const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
+const destacado = proyectos.find((p) => p.data.destacado) ?? proyectos[0];
+
+// Datos estructurados para buscadores (schema.org)
+const personaJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: perfil.nombre,
+  jobTitle: perfil.titulo,
+  url: Astro.site?.href,
+  email: `mailto:${perfil.contacto.email}`,
+  address: { '@type': 'PostalAddress', addressRegion: perfil.ubicacion, addressCountry: 'ES' },
+  sameAs: [perfil.contacto.linkedin, perfil.contacto.github],
+};
+---
+
+<Base>
+  <script is:inline type="application/ld+json" slot="head" set:html={JSON.stringify(personaJsonLd)} />
+
+  <!-- Presentación, sobre la banda oscura de la marca -->
+  <section class="band" aria-labelledby="titulo">
+    <div class="deco" aria-hidden="true"><span class="ring"></span><span class="sun"></span></div>
+    <div class="wrap hero">
+      <div class="intro">
+        <p class="status"><span class="dot" aria-hidden="true"></span>{perfil.disponibilidad}</p>
+        <h1 id="titulo">
+          {perfil.nombre}
+          <span class="role">{perfil.titulo}</span>
+        </h1>
+        <p class="sub">{perfil.subtitulo} · {perfil.ubicacion}</p>
+        <p class="lede">{perfil.presentacion}</p>
+        <div class="ctas">
+          <a class="btn light" href="#proyectos">Ver proyectos</a>
+          <a class="btn ghost" href="#contacto">Contactar</a>
+        </div>
+      </div>
+
+      <a class="browser" href={`/proyectos/${destacado.id}/`} aria-label={`Ver el proyecto ${destacado.data.titulo}`}>
+        <div class="chrome" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <small>{destacado.data.demo?.replace('https://', '')}</small>
+        </div>
+        <Image src={destacado.data.imagen} alt="" widths={[480, 800, 1100]} sizes="(min-width: 900px) 480px, 100vw" loading="eager" />
+      </a>
+    </div>
+
+    <div class="wrap">
+      <ul class="facts">
+        {
+          perfil.destacados.map((d) => (
+            <li>
+              <span class="k">{d.etiqueta}</span>
+              <strong>{d.texto}</strong>
+              <span>{d.detalle}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section id="sobre-mi" class="block" aria-labelledby="t-sobre">
+    <div class="wrap">
+      <div class="head"><p class="label"><b>01</b> Sobre mí</p><h2 id="t-sobre">{perfil.sobreMiTitulo}</h2></div>
+      <div class="prose about">
+        {perfil.sobreMi.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos -->
+  <section id="proyectos" class="block tinted" aria-labelledby="t-proyectos">
+    <div class="wrap">
+      <div class="head">
+        <p class="label"><b>02</b> Proyectos</p>
+        <h2 id="t-proyectos">Lo que he construido</h2>
+      </div>
+      <div class="grid">
+        {proyectos.map((p) => <ProjectCard proyecto={p} />)}
+      </div>
+      <p class="more">
+        Más proyectos y prácticas en <a class="link" href={perfil.contacto.github}>mi GitHub</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Experiencia -->
+  <section id="experiencia" class="block" aria-labelledby="t-exp">
+    <div class="wrap sec">
+      <div><p class="label"><b>03</b> Experiencia</p><h2 id="t-exp">Trayectoria</h2></div>
+      <ol class="timeline">
+        {
+          experiencia.map((e) => (
+            <li class:list={['job', { now: e.actual }]}>
+              <p class="when">{e.fechas}</p>
+              <div>
+                <h3>
+                  {e.puesto}
+                  {e.actual && <span class="badge">actual</span>}
+                </h3>
+                <p class="org">
+                  {e.empresa}
+                  {e.tipo && <span> · {e.tipo}</span>}
+                </p>
+                <ul>
+                  {e.tareas.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Formación -->
+  <section id="formacion" class="block tinted" aria-labelledby="t-form">
+    <div class="wrap sec">
+      <div><p class="label"><b>04</b> Formación</p><h2 id="t-form">Estudios y cursos</h2></div>
+      <div class="edu">
+        {
+          formacion.map((g) => (
+            <div>
+              <h3 class="label">{g.grupo}</h3>
+              <ul>
+                {g.items.map((i) => (
+                  <li>
+                    <div>
+                      <strong>{i.titulo}</strong>
+                      <span>{i.centro}</span>
+                    </div>
+                    {i.fechas && <span class="yr">{i.fechas}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section id="habilidades" class="block" aria-labelledby="t-hab">
+    <div class="wrap sec">
+      <div>
+        <p class="label"><b>05</b> Habilidades</p><h2 id="t-hab">Con qué trabajo</h2>
+        <p class="note">Agrupadas según dónde las he usado, no con porcentajes.</p>
+      </div>
+      <div>
+        <div class="skills">
+          {
+            habilidades.map((h, i) => (
+              <div class={`group g${i}`}>
+                <h3>{h.grupo}</h3>
+                <p>{h.explicacion}</p>
+                <ul class="chips">
+                  {h.items.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+        <p class="langs">
+          <strong>Idiomas:</strong>{' '}
+          {idiomas.map((l) => `${l.idioma} (${l.nivel})`).join(' · ')}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="block" aria-labelledby="t-contacto">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <p class="label"><b>06</b> Contacto</p>
+          <h2 id="t-contacto">¿Hablamos?</h2>
+          <p>
+            {perfil.busco} Estoy {perfil.disponibilidad.charAt(0).toLowerCase() + perfil.disponibilidad.slice(1)}.
+          </p>
+        </div>
+        <ul class="clist">
+          <li class="crow">
+            <span><small>Email</small><a href={`mailto:${perfil.contacto.email}`}>{perfil.contacto.email}</a></span>
+            <CopyButton value={perfil.contacto.email} label="Copiar email" />
+          </li>
+          <li class="crow">
+            <span><small>Teléfono</small><a href={`tel:${perfil.contacto.telefono.replaceAll(' ', '')}`}>{perfil.contacto.telefono}</a></span>
+            <CopyButton value={perfil.contacto.telefono.replaceAll(' ', '')} label="Copiar teléfono" />
+          </li>
+          <li class="crow">
+            <span><small>LinkedIn</small>linkedin.com/in/ithaisa-sg</span>
+            <a class="go" href={perfil.contacto.linkedin} rel="noopener">Abrir<span class="visually-hidden"> LinkedIn</span></a>
+          </li>
+          <li class="crow">
+            <span><small>GitHub</small>github.com/Ithaisa1</span>
+            <a class="go" href={perfil.contacto.github} rel="noopener">Abrir<span class="visually-hidden"> GitHub</span></a>
+          </li>
+          {
+            perfil.contacto.cv && (
+              <li class="crow">
+                <span><small>Currículum</small>PDF</span>
+                <a class="go" href={perfil.contacto.cv} download>Descargar<span class="visually-hidden"> currículum</span></a>
+              </li>
+            )
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Banda de presentación ---------- */
+  .band {
+    position: relative;
+    overflow: hidden;
+    background: var(--band);
+    color: var(--band-ink);
+    padding-bottom: 40px;
+  }
+  /* Rejilla suave de fondo y los círculos de la marca (los mismos que la imagen para redes) */
+  .band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--band-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--band-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 70% 20%, #000 10%, transparent 70%);
+    opacity: 0.55;
+  }
+  .deco .ring,
+  .deco .sun {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .deco .ring {
+    width: 460px;
+    height: 460px;
+    right: -150px;
+    top: -170px;
+    border: 2px solid var(--band-accent);
+    opacity: 0.3;
+  }
+  .deco .sun {
+    width: 240px;
+    height: 240px;
+    right: -60px;
+    top: -80px;
+    background: var(--warm);
+    opacity: 0.9;
+  }
+  .hero {
+    position: relative;
+    display: grid;
+    gap: 40px;
+    padding-block: 48px 40px;
+    align-items: center;
+  }
+  .hero > * {
+    min-width: 0;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 56px;
+      padding-block: 88px 56px;
+    }
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    color: var(--band-accent);
+    border: 1px solid color-mix(in srgb, var(--band-accent) 45%, transparent);
+    background: color-mix(in srgb, var(--band-accent) 12%, transparent);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--band-accent);
+    animation: ping 2.4s infinite;
+  }
+  @keyframes ping {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--band-accent) 60%, transparent);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6.4vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 22px 0 16px;
+  }
+  .role {
+    display: block;
+    color: var(--band-accent);
+  }
+  .sub {
+    font-family: var(--f-mono);
+    font-size: 0.92rem;
+    color: var(--band-muted);
+    margin: 0 0 20px;
+  }
+  .lede {
+    font-size: 1.14rem;
+    max-width: 56ch;
+    margin: 0 0 30px;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn.light {
+    background: var(--band-accent);
+    border-color: var(--band-accent);
+    color: var(--band);
+  }
+  .btn.ghost {
+    border-color: var(--band-muted);
+    color: var(--band-ink);
+  }
+  .band :focus-visible {
+    outline-color: var(--band-ink);
+  }
+
+  /* Captura del proyecto destacado dentro de un marco de navegador */
+  .browser {
+    display: block;
+    border-radius: var(--radius);
+    border: 1px solid var(--band-line);
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.6);
+    transform: rotate(1.5deg);
+    transition: transform 0.25s;
+  }
+  .browser:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+  .chrome {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #e8edec;
+  }
+  .chrome span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c3cecc;
+  }
+  .chrome span:first-child {
+    background: var(--warm);
+  }
+  .chrome small {
+    margin-left: 10px;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    color: #4e5f66;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Tres datos destacados */
+  .facts {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 720px) {
+    .facts {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .facts li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 18px 20px;
+    border: 1px solid var(--band-line);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--band-ink) 4%, transparent);
+  }
+  .facts .k {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--band-accent);
+  }
+  .facts strong {
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .facts li > span:last-child {
+    color: var(--band-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ---------- Secciones ---------- */
+  .block {
+    padding-block: 64px;
+  }
+  .tinted {
+    background: color-mix(in srgb, var(--accent-soft) 45%, var(--bg));
+  }
+  .sec {
+    display: grid;
+    gap: 24px;
+  }
+  .sec > * {
+    min-width: 0;
+  }
+  @media (min-width: 900px) {
+    .block {
+      padding-block: 88px;
+    }
+    .sec {
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+    }
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    margin: 10px 0 0;
+  }
+  .label {
+    margin: 0;
+  }
+  /* Número de sección en el color cálido */
+  .label b {
+    color: var(--warm-ink);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  /* Sobre mí: el texto en dos columnas en pantallas anchas */
+  @media (min-width: 900px) {
+    .about {
+      max-width: none;
+      columns: 2;
+      column-gap: 48px;
+    }
+    .about p {
+      break-inside: avoid;
+    }
+  }
+  .about p:first-child {
+    margin-top: 0;
+  }
+
+  /* Proyectos */
+  .head {
+    margin-bottom: 32px;
+  }
+  .grid {
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .more {
+    margin: 28px 0 0;
+    color: var(--muted);
+  }
+
+  /* Experiencia: línea de tiempo con puntos */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .job {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    padding: 0 0 32px 28px;
+  }
+  .job::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    bottom: -6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .job:last-child::before {
+    display: none;
+  }
+  .job::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+  .job.now::after {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .job > * {
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .job {
+      grid-template-columns: 150px 1fr;
+      gap: 24px;
+    }
+  }
+  .when {
+    margin: 0;
+    font-family: var(--f-mono);
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  .now .when {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .job h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  .org {
+    margin: 2px 0 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .org span {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .job ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+  }
+  .badge {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    background: var(--accent);
+    color: var(--surface);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  /* Formación */
+  .edu {
+    display: grid;
+    gap: 28px;
+  }
+  .edu ul {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .edu li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu li:last-child {
+    border-bottom: 0;
+  }
+  .edu li div {
+    display: flex;
+    flex-direction: column;
+  }
+  .edu li span {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .edu strong {
+    font-weight: 600;
+  }
+  .edu .yr {
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  /* Habilidades: un color por grupo */
+  .skills {
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .skills {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .group {
+    --g: var(--accent);
+    min-width: 0;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--g);
+    border-radius: var(--radius);
+  }
+  .g1 {
+    --g: var(--ink);
+  }
+  .g2 {
+    --g: var(--warm);
+  }
+  .g3 {
+    --g: var(--muted);
+  }
+  .skills h3 {
+    font-size: 1.12rem;
+    margin: 0 0 4px;
+  }
+  .skills p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .chips li {
+    font-size: 0.88rem;
+    padding: 5px 11px;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .langs {
+    margin: 24px 0 0;
+    color: var(--muted);
+  }
+  .langs strong {
+    color: var(--ink);
+  }
+
+  /* Contacto */
+  .contact {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 32px;
+    align-items: center;
+    background: var(--cta);
+    color: #fff;
+    border-radius: 24px;
+    padding: 36px 20px;
+  }
+  .contact::after {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    right: -70px;
+    bottom: -90px;
+    background: var(--warm);
+    opacity: 0.85;
+  }
+  .contact > * {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+  @media (min-width: 900px) {
+    .contact {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      padding: 56px;
+    }
+  }
+  .contact .label {
+    color: #d6ece9;
+  }
+  .contact .label b {
+    color: #fff;
+  }
+  .contact h2 {
+    margin: 8px 0 14px;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+  }
+  .contact p {
+    margin: 0;
+    max-width: 46ch;
+  }
+  .clist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .crow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: rgb(0 0 0 / 0.18);
+    border-radius: 12px;
+    padding: 10px 12px 10px 16px;
+  }
+  .crow > span {
+    font-family: var(--f-mono);
+    font-size: 0.86rem;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .crow a:not(.go) {
+    text-decoration: none;
+  }
+  .crow a:not(.go):hover {
+    text-decoration: underline;
+  }
+  .crow small {
+    display: block;
+    font-family: var(--f-body);
+    opacity: 0.85;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .contact :focus-visible {
+    outline-color: #fff;
+  }
+  .contact :global(.copy),
+  .go {
+    background: #fff;
+    color: #13232b;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+// Estructura común de todas las páginas: <head> con SEO, cabecera, contenido y pie.
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { perfil } from '../data/perfil';
+
+interface Props {
+  title?: string; // Si no se indica, se usa el nombre y el título profesional
+  description?: string;
+  image?: string; // Imagen para compartir en redes (ruta dentro de public/)
+}
+
+const {
+  title,
+  description = `${perfil.nombre}, ${perfil.titulo.toLowerCase()} junior en ${perfil.ubicacion}. ${perfil.subtitulo}. Proyectos, experiencia y contacto.`,
+  image = '/og.png',
+} = Astro.props;
+
+const fullTitle = title ? `${title} · ${perfil.nombre}` : `${perfil.nombre} · ${perfil.titulo}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#f3f5f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1719" media="(prefers-color-scheme: dark)" />
+
+    <!-- Vista previa al compartir el enlace (LinkedIn, WhatsApp…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

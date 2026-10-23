@@ -1,0 +1,53 @@
+---
+// Botón «Copiar». Si el navegador no permite copiar, selecciona el texto para copiarlo a mano.
+interface Props {
+  value: string;
+  label: string; // Texto para lectores de pantalla, por ejemplo «Copiar email»
+}
+const { value, label } = Astro.props;
+---
+
+<button type="button" class="copy" data-copy={value} aria-label={label}>Copiar</button>
+<span class="visually-hidden" role="status" aria-live="polite"></span>
+
+<style>
+  .copy {
+    background: var(--bg);
+    color: var(--ink);
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font: 600 0.82rem var(--f-body);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const value = btn.dataset.copy ?? '';
+      const status = btn.nextElementSibling as HTMLElement | null;
+      try {
+        await navigator.clipboard.writeText(value);
+        btn.textContent = 'Copiado';
+        if (status) status.textContent = 'Copiado al portapapeles';
+        setTimeout(() => {
+          btn.textContent = 'Copiar';
+          if (status) status.textContent = '';
+        }, 1800);
+      } catch {
+        // Sin permiso para el portapapeles: seleccionamos el texto
+        const text = btn.parentElement?.querySelector('span > a');
+        if (text) {
+          const range = document.createRange();
+          range.selectNodeContents(text);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(range);
+        }
+        btn.textContent = 'Selecciona y copia';
+      }
+    });
+  });
+</script>

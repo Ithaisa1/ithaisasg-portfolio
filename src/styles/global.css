@@ -1,0 +1,233 @@
+/* Estilos globales: colores, tipografía y piezas que se usan en varias páginas.
+   Los estilos de cada componente están dentro de su archivo .astro. */
+
+/* Fuentes alojadas en la propia web (sin Google Fonts): más rápido y sin enviar datos a terceros. */
+@import '@fontsource-variable/bricolage-grotesque/wght.css';
+@import '@fontsource-variable/instrument-sans/wght.css';
+
+/* ---------- Colores (tokens) ----------
+   Contraste comprobado: el texto normal supera 4.5:1 sobre su fondo en ambos temas. */
+:root {
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --ink: #13232b;
+  --muted: #4e5f66;
+  --line: #d5dddb;
+  --accent: #0a716c;
+  --accent-soft: #d6ece9;
+  --warm: #e2643b;
+  --warm-ink: #b03f18; /* naranja para texto: contraste 5:1 sobre el fondo claro */
+
+  --f-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'Instrument Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Banda oscura de la cabecera y la portada (igual en los dos temas) */
+  --band: #13232b;
+  --band-ink: #f3f5f4;
+  --band-muted: #b7c6c4;
+  --band-line: #2a3d44;
+  --band-accent: #4fc2b8;
+  /* Bloque de contacto: texto blanco sobre verde azulado (contraste 5.5:1) */
+  --cta: #0a716c;
+
+  --radius: 14px;
+  --wrap: 1120px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1719;
+    --surface: #152226;
+    --ink: #e6eeec;
+    --muted: #a3b5b4;
+    --line: #27393d;
+    --accent: #4fc2b8;
+    --accent-soft: #183a3a;
+    --warm: #f08a63;
+    --warm-ink: #f08a63;
+    --band: #091114;
+    --band-line: #1f3136;
+    --cta: #0a6964;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* para que la cabecera fija no tape los títulos al saltar a una sección */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--f-display);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Utilidades ---------- */
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: 24px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 20;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+.label {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn.primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Enlace de texto con flecha */
+.link {
+  color: var(--accent);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Etiquetas de tecnología ---------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tags li {
+  font-family: var(--f-mono);
+  font-size: 0.74rem;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* ---------- Texto largo (fichas de proyecto) ---------- */
+.prose {
+  max-width: 68ch;
+}
+.prose h2 {
+  font-size: 1.45rem;
+  margin: 2.2em 0 0.6em;
+}
+.prose h2:first-child {
+  margin-top: 0;
+}
+.prose p,
+.prose li {
+  font-size: 1.05rem;
+}
+.prose ul {
+  padding-left: 1.2em;
+}
+.prose li {
+  margin-bottom: 0.45em;
+}
+.prose strong {
+  font-weight: 600;
+}

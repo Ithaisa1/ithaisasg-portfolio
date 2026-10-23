@@ -1,0 +1,14 @@
+# Dependencias y builds
+node_modules/
+dist/
+.astro/
+
+# Variables de entorno (este proyecto no necesita ninguna)
+.env
+.env.*
+
+# Sistema y editores
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+*.log
