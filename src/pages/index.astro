@@ -43,7 +43,8 @@ const personaJsonLd = {
         </div>
       </div>
 
-      <a class="browser" href={`/proyectos/${destacado.id}/`} aria-label={`Ver el proyecto ${destacado.data.titulo}`}>
+      <a class="browser" href={`/proyectos/${destacado.id}/`}>
+        <span class="visually-hidden">Ver el proyecto {destacado.data.titulo}</span>
         <div class="chrome" aria-hidden="true">
           <span></span><span></span><span></span>
           <small>{destacado.data.demo?.replace('https://', '')}</small>

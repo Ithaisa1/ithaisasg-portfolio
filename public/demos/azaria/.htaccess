@@ -1,0 +1,6 @@
+# Demo de AzarIA (app de una sola página): cualquier ruta que no sea un archivo abre index.html
+RewriteEngine On
+RewriteBase /demos/azaria/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /demos/azaria/index.html [L]

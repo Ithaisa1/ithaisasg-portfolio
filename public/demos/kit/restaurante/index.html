@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ✏️ EDITA: nombre del restaurante y descripción para Google -->
+<meta name="robots" content="noindex">
+<title>Demo · La Huerta · Cocina mediterránea de temporada</title>
+<meta name="description" content="Restaurante de cocina mediterránea con producto de temporada. Reserva tu mesa por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* 🎨 EDITA: colores de tu marca */
+:root{
+  --principal:#c2502b;   /* terracota */
+  --oscuro:#1e2a22;      /* verde muy oscuro */
+  --crema:#f6efe4;
+  --blanco:#fffcf7;
+  --texto:#2b2722;
+  --suave:#776f64;
+  --radio:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--texto);background:var(--blanco);line-height:1.65}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.1;letter-spacing:-.01em}
+.contenedor{width:min(1140px,100% - 40px);margin:0 auto}
+.etiqueta{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--principal);margin-bottom:14px}
+.titulo{font-size:clamp(2rem,5vw,3.2rem);font-weight:600;margin-bottom:18px}
+.boton{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:50px;background:var(--principal);color:#fff;text-decoration:none;font-weight:600;transition:transform .2s,background .2s;border:2px solid var(--principal)}
+.boton:hover{transform:translateY(-2px);background:#a8411f;border-color:#a8411f}
+.boton.borde{background:transparent;color:inherit;border-color:currentColor}
+.boton.borde:hover{background:#fff;color:var(--oscuro);border-color:#fff}
+
+/* Foto de relleno: sustitúyela por <img src="tu-foto.jpg" alt="..."> */
+.foto{border-radius:var(--radio);display:grid;place-items:center;font-size:4rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#e9b384,#c2502b)}
+.foto img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.foto.f2{background:linear-gradient(135deg,#9bb07a,#3f5a3a)}
+.foto.f3{background:linear-gradient(135deg,#f0d9a7,#d58b3c)}
+.foto.f4{background:linear-gradient(135deg,#7a8f6b,#1e2a22)}
+
+/* ---------- Menú de navegación ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:30;transition:background .3s,box-shadow .3s}
+.nav.solida{background:rgba(255,252,247,.95);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.nav .contenedor{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:800;text-decoration:none;color:#fff;transition:color .3s}
+.logo span{color:var(--principal)}
+.nav.solida .logo{color:var(--oscuro)}
+.menu{display:flex;gap:30px;list-style:none;align-items:center}
+.menu a{text-decoration:none;color:#fff;font-weight:500;font-size:.95rem;transition:color .3s}
+.nav.solida .menu a{color:var(--texto)}
+.menu a:hover{color:var(--principal)!important}
+.menu .boton{padding:10px 22px;color:#fff!important}
+.hamburguesa{display:none;background:none;border:none;cursor:pointer;width:44px;height:44px;flex-direction:column;justify-content:center;gap:5px;align-items:center}
+.hamburguesa span{width:24px;height:2px;background:#fff;transition:.3s}
+.nav.solida .hamburguesa span{background:var(--oscuro)}
+
+/* ---------- Portada ---------- */
+.hero{min-height:100vh;background:radial-gradient(circle at 80% 20%,rgba(194,80,43,.35),transparent 50%),linear-gradient(160deg,#2a3a2f 0%,var(--oscuro) 70%);color:#fff;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero::after{content:"🌿";position:absolute;font-size:22rem;right:-60px;bottom:-80px;opacity:.07;transform:rotate(-20deg)}
+.hero .contenedor{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.8rem,7vw,5.2rem);font-weight:800;margin-bottom:22px}
+.hero h1 em{font-weight:400;color:#f0b08f}
+.hero p{font-size:1.15rem;opacity:.85;max-width:480px;margin-bottom:34px}
+.hero .botones{display:flex;gap:14px;flex-wrap:wrap}
+.hero .foto{aspect-ratio:4/5;font-size:7rem;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.datos{display:flex;gap:36px;margin-top:46px;flex-wrap:wrap}
+.datos strong{display:block;font-family:'Fraunces',serif;font-size:2rem;color:#f0b08f}
+.datos span{font-size:.85rem;opacity:.75}
+
+/* ---------- Sobre nosotros ---------- */
+section{padding:110px 0}
+.sobre .contenedor{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.sobre .fotos{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sobre .fotos .foto{aspect-ratio:3/4}
+.sobre .fotos .foto:last-child{margin-top:50px}
+.sobre p{color:var(--suave);margin-bottom:16px;font-size:1.05rem}
+.firma{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--texto)!important}
+
+/* ---------- Carta ---------- */
+.carta{background:var(--crema)}
+.cabeza{text-align:center;max-width:620px;margin:0 auto 46px}
+.cabeza p{color:var(--suave)}
+.pestanas{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.pestana{padding:10px 22px;border-radius:40px;border:1.5px solid #d9cdbb;background:transparent;font-family:inherit;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .2s;color:var(--texto)}
+.pestana:hover{border-color:var(--principal)}
+.pestana.activa{background:var(--oscuro);border-color:var(--oscuro);color:#fff}
+.platos{display:none;grid-template-columns:1fr 1fr;gap:8px 60px;max-width:960px;margin:0 auto}
+.platos.activa{display:grid;animation:aparecer .4s ease}
+@keyframes aparecer{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.plato{padding:20px 0;border-bottom:1px dashed #d9cdbb}
+.plato .fila{display:flex;align-items:baseline;gap:10px}
+.plato h3{font-size:1.25rem;font-weight:600}
+.plato .puntos{flex:1;border-bottom:2px dotted #cbbda8;transform:translateY(-4px)}
+.plato .precio{white-space:nowrap;font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;color:var(--principal)}
+.plato p{color:var(--suave);font-size:.93rem;margin-top:4px}
+.chip{display:inline-block;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:20px;background:#e3ead9;color:#3f5a3a;margin-left:6px;vertical-align:middle}
+.chip.nuevo{background:#f7dccf;color:var(--principal)}
+.centro{text-align:center;margin-top:44px}
+
+/* ---------- Opiniones ---------- */
+.opiniones{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.opinion{background:#fff;padding:32px;border-radius:var(--radio);border:1px solid #efe6d8}
+.estrellas{color:#e5a63b;letter-spacing:3px;margin-bottom:14px}
+.opinion blockquote{font-family:'Fraunces',serif;font-size:1.1rem;line-height:1.5;margin-bottom:22px}
+.autor{display:flex;align-items:center;gap:12px}
+.autor .inicial{width:42px;height:42px;border-radius:50%;background:var(--crema);display:grid;place-items:center;font-weight:600;color:var(--principal)}
+.autor small{display:block;color:var(--suave)}
+
+/* ---------- Reservas ---------- */
+.reserva{background:var(--oscuro);color:#fff;border-radius:28px;padding:70px 60px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;position:relative;overflow:hidden}
+.reserva::before{content:"";position:absolute;width:400px;height:400px;border-radius:50%;background:var(--principal);opacity:.25;filter:blur(80px);top:-150px;right:-100px}
+.reserva > *{position:relative}
+.reserva p{opacity:.8;font-size:1.05rem}
+.formulario{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.formulario label{font-size:.78rem;font-weight:600;letter-spacing:.06em;opacity:.75;display:block;margin-bottom:6px}
+.formulario input,.formulario select{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-family:inherit;font-size:1rem;outline:none;color-scheme:dark}
+.formulario input:focus,.formulario select:focus{border-color:var(--principal)}
+.formulario option{color:var(--texto)}
+.formulario .completo{grid-column:1/-1}
+.formulario .boton{width:100%;justify-content:center;cursor:pointer;font-family:inherit;font-size:1rem}
+
+/* ---------- Ubicación ---------- */
+.ubicacion .contenedor{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:center}
+.lista-info{list-style:none;display:grid;gap:22px;margin-top:10px}
+.lista-info li{display:flex;gap:16px}
+.lista-info .ic{width:46px;height:46px;flex-shrink:0;border-radius:14px;background:var(--crema);display:grid;place-items:center;font-size:1.2rem}
+.lista-info strong{display:block}
+.lista-info span{color:var(--suave);font-size:.95rem}
+.mapa{border-radius:var(--radio);overflow:hidden;height:400px;border:1px solid #efe6d8}
+.mapa iframe{width:100%;height:100%;border:0}
+
+/* ---------- Pie ---------- */
+footer{background:var(--oscuro);color:rgba(255,255,255,.7);padding:60px 0 30px}
+footer .contenedor{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer .logo{color:#fff}
+.sociales{display:flex;gap:12px}
+.sociales a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;text-decoration:none;transition:background .2s}
+.sociales a:hover{background:var(--principal);border-color:var(--principal)}
+.legal{width:100%;text-align:center;font-size:.82rem;margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+
+/* Botón flotante de WhatsApp */
+.flotante{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);z-index:25;transition:transform .2s}
+.flotante:hover{transform:scale(1.08)}
+
+/* Aparición al hacer scroll */
+.revelar{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.revelar.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.revelar{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* ---------- Móvil y tablet ---------- */
+@media (max-width:900px){
+  .hero .contenedor,.sobre .contenedor,.ubicacion .contenedor,.reserva{grid-template-columns:1fr}
+  .hero .foto{display:none}
+  .opiniones{grid-template-columns:1fr}
+  .platos{grid-template-columns:1fr}
+  .reserva{padding:46px 26px}
+  section{padding:80px 0}
+}
+@media (max-width:760px){
+  .hamburguesa{display:flex}
+  .menu{position:fixed;inset:74px 0 auto 0;flex-direction:column;background:var(--blanco);padding:24px;gap:18px;box-shadow:0 20px 30px rgba(0,0,0,.08);transform:translateY(-130%);transition:transform .35s ease;z-index:-1}
+  .menu.abierto{transform:none}
+  .menu a{color:var(--texto)!important}
+  .nav.menu-abierto{background:var(--blanco)}
+  .nav.menu-abierto .logo{color:var(--oscuro)}
+  .nav.menu-abierto .hamburguesa span{background:var(--oscuro)}
+  .formulario{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ MENÚ ============ -->
+<header class="nav" id="nav">
+  <div class="contenedor">
+    <!-- ✏️ EDITA: nombre del restaurante -->
+    <a href="#inicio" class="logo">La Huerta<span>.</span></a>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#carta">Carta</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#ubicacion">Dónde estamos</a></li>
+      <li><a href="#reservar" class="boton">Reservar</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ PORTADA ============ -->
+<section class="hero" id="inicio">
+  <div class="contenedor">
+    <div>
+      <span class="etiqueta" style="color:#f0b08f">Cocina mediterránea · Desde 2009</span>
+      <!-- ✏️ EDITA: frase principal -->
+      <h1>Del huerto <em>a tu mesa</em>, cada día.</h1>
+      <p>Producto fresco de temporada, recetas de siempre y un rincón tranquilo para disfrutar sin prisas.</p>
+      <div class="botones">
+        <a href="#reservar" class="boton">Reservar mesa →</a>
+        <a href="#carta" class="boton borde">Ver la carta</a>
+      </div>
+      <div class="datos">
+        <div><strong>4,8 ★</strong><span>en Google (620 reseñas)</span></div>
+        <div><strong>15</strong><span>años de cocina</span></div>
+        <div><strong>100%</strong><span>producto local</span></div>
+      </div>
+    </div>
+    <!-- 📷 Cambia el emoji por: <img src="foto-portada.jpg" alt="Plato estrella"> -->
+    <div class="foto">🥘</div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="sobre" id="nosotros">
+  <div class="contenedor">
+    <div class="fotos revelar">
+      <div class="foto f2">👩‍🍳</div>
+      <div class="foto f3">🍅</div>
+    </div>
+    <div class="revelar">
+      <span class="etiqueta">Nuestra historia</span>
+      <h2 class="titulo">Una cocina con raíces y alma de barrio</h2>
+      <p>La Huerta nació del sueño de la familia Romero: cocinar como lo hacía la abuela, con lo que da la tierra en cada estación y sin atajos.</p>
+      <p>Trabajamos con agricultores de la zona y cambiamos la carta con las temporadas. Aquí todo se cocina al momento.</p>
+      <p class="firma">— Carmen Romero, chef y fundadora</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARTA ============ -->
+<!-- ✏️ EDITA: platos, descripciones y precios. Copia un bloque <article class="plato"> para añadir más. -->
+<section class="carta" id="carta">
+  <div class="contenedor">
+    <div class="cabeza revelar">
+      <span class="etiqueta">La carta</span>
+      <h2 class="titulo">Sabores de temporada</h2>
+      <p>Pregunta por nuestras sugerencias del día. Informamos de alérgenos.</p>
+    </div>
+
+    <div class="pestanas" role="tablist">
+      <button class="pestana activa" data-pestana="entrantes">Entrantes</button>
+      <button class="pestana" data-pestana="principales">Principales</button>
+      <button class="pestana" data-pestana="postres">Postres</button>
+      <button class="pestana" data-pestana="bebidas">Bebidas</button>
+    </div>
+
+    <div class="platos activa" id="entrantes">
+      <article class="plato"><div class="fila"><h3>Salmorejo cordobés</h3><span class="puntos"></span><span class="precio">8,50 €</span></div><p>Con huevo de corral y jamón ibérico.</p></article>
+      <article class="plato"><div class="fila"><h3>Croquetas de la abuela <span class="chip nuevo">Favorito</span></h3><span class="puntos"></span><span class="precio">9,00 €</span></div><p>8 unidades de jamón, cocido y boletus.</p></article>
+      <article class="plato"><div class="fila"><h3>Ensalada de la huerta <span class="chip">Vegano</span></h3><span class="puntos"></span><span class="precio">10,50 €</span></div><p>Tomate de temporada, cebolla morada, aceitunas y AOVE.</p></article>
+      <article class="plato"><div class="fila"><h3>Pimientos de Padrón</h3><span class="puntos"></span><span class="precio">7,00 €</span></div><p>Unos pican y otros no.</p></article>
+    </div>
+
+    <div class="platos" id="principales">
+      <article class="plato"><div class="fila"><h3>Arroz meloso de verduras <span class="chip">Vegano</span></h3><span class="puntos"></span><span class="precio">16,00 €</span></div><p>Mínimo 2 personas. Precio por persona.</p></article>
+      <article class="plato"><div class="fila"><h3>Lubina a la sal</h3><span class="puntos"></span><span class="precio">21,00 €</span></div><p>Con patatas panaderas y ensalada.</p></article>
+      <article class="plato"><div class="fila"><h3>Carrillera al vino tinto <span class="chip nuevo">Nuevo</span></h3><span class="puntos"></span><span class="precio">18,50 €</span></div><p>Cocinada a fuego lento durante 8 horas.</p></article>
+      <article class="plato"><div class="fila"><h3>Pollo de corral al ajillo</h3><span class="puntos"></span><span class="precio">15,00 €</span></div><p>Receta tradicional con ajos confitados.</p></article>
+    </div>
+
+    <div class="platos" id="postres">
+      <article class="plato"><div class="fila"><h3>Tarta de queso al horno</h3><span class="puntos"></span><span class="precio">6,50 €</span></div><p>Cremosa, con mermelada de frutos rojos.</p></article>
+      <article class="plato"><div class="fila"><h3>Torrija caramelizada</h3><span class="puntos"></span><span class="precio">6,00 €</span></div><p>Con helado de vainilla.</p></article>
+      <article class="plato"><div class="fila"><h3>Fruta de temporada <span class="chip">Vegano</span></h3><span class="puntos"></span><span class="precio">4,50 €</span></div><p>Según mercado.</p></article>
+    </div>
+
+    <div class="platos" id="bebidas">
+      <article class="plato"><div class="fila"><h3>Vino de la casa (copa)</h3><span class="puntos"></span><span class="precio">3,50 €</span></div><p>Tinto, blanco o rosado.</p></article>
+      <article class="plato"><div class="fila"><h3>Cerveza artesana local</h3><span class="puntos"></span><span class="precio">4,00 €</span></div><p>Rubia o tostada.</p></article>
+      <article class="plato"><div class="fila"><h3>Limonada casera</h3><span class="puntos"></span><span class="precio">3,00 €</span></div><p>Con hierbabuena del huerto.</p></article>
+    </div>
+
+    <div class="centro">
+      <!-- ✏️ Si tienes la carta en PDF, pon aquí el enlace -->
+      <a href="#" class="boton borde">Descargar carta completa (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIONES ============ -->
+<section id="opiniones">
+  <div class="contenedor">
+    <div class="cabeza revelar">
+      <span class="etiqueta">Opiniones</span>
+      <h2 class="titulo">Lo que dicen nuestros clientes</h2>
+    </div>
+    <!-- ✏️ EDITA: copia aquí reseñas reales de Google -->
+    <div class="opiniones">
+      <article class="opinion revelar">
+        <div class="estrellas">★★★★★</div>
+        <blockquote>"Las croquetas son las mejores que he probado. Trato cercano y ambiente muy acogedor."</blockquote>
+        <div class="autor"><span class="inicial">A</span><div><strong>Ana P.</strong><small>Reseña de Google</small></div></div>
+      </article>
+      <article class="opinion revelar">
+        <div class="estrellas">★★★★★</div>
+        <blockquote>"Celebramos el cumpleaños de mi madre y todo fue perfecto. El arroz, espectacular."</blockquote>
+        <div class="autor"><span class="inicial">J</span><div><strong>Javier M.</strong><small>Reseña de Google</small></div></div>
+      </article>
+      <article class="opinion revelar">
+        <div class="estrellas">★★★★★</div>
+        <blockquote>"Producto de calidad a buen precio. Se nota el cariño en cada plato. Volveremos."</blockquote>
+        <div class="autor"><span class="inicial">L</span><div><strong>Laura G.</strong><small>Reseña de Google</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVAS ============ -->
+<section id="reservar" style="padding-top:0">
+  <div class="contenedor">
+    <div class="reserva revelar">
+      <div>
+        <span class="etiqueta" style="color:#f0b08f">Reservas</span>
+        <h2 class="titulo">Reserva tu mesa en 1 minuto</h2>
+        <p>Rellena el formulario y te confirmamos por WhatsApp. Para grupos de más de 10 personas, llámanos.</p>
+      </div>
+      <form class="formulario" id="form-reserva">
+        <div class="completo"><label for="r-nombre">Nombre</label><input id="r-nombre" required placeholder="Tu nombre"></div>
+        <div><label for="r-fecha">Fecha</label><input id="r-fecha" type="date" required></div>
+        <div><label for="r-hora">Hora</label>
+          <select id="r-hora"><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option></select>
+        </div>
+        <div class="completo"><label for="r-personas">Personas</label>
+          <select id="r-personas"><option>2</option><option>1</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+        </div>
+        <div class="completo"><button class="boton" type="submit">Reservar por WhatsApp</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UBICACIÓN ============ -->
+<section class="ubicacion" id="ubicacion" style="padding-top:0">
+  <div class="contenedor">
+    <div class="revelar">
+      <span class="etiqueta">Visítanos</span>
+      <h2 class="titulo">Dónde estamos</h2>
+      <!-- ✏️ EDITA: dirección, horario y teléfono -->
+      <ul class="lista-info">
+        <li><span class="ic">📍</span><div><strong>Dirección</strong><span>Calle del Olivo 24, 28001 Madrid</span></div></li>
+        <li><span class="ic">🕐</span><div><strong>Horario</strong><span>Mar – Dom: 13:00 – 16:30 y 20:00 – 23:30<br>Lunes cerrado</span></div></li>
+        <li><span class="ic">📞</span><div><strong>Teléfono</strong><span><a href="tel:+34910000000">910 000 000</a></span></div></li>
+      </ul>
+    </div>
+    <!-- ✏️ EDITA: cambia "Calle+del+Olivo+24+Madrid" por tu dirección (espacios = +) -->
+    <div class="mapa revelar">
+      <iframe src="https://maps.google.com/maps?q=Calle+del+Olivo+24+Madrid&z=15&output=embed" loading="lazy" title="Mapa de ubicación"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIE ============ -->
+<footer>
+  <div class="contenedor">
+    <a href="#inicio" class="logo">La Huerta<span>.</span></a>
+    <!-- ✏️ EDITA: enlaces a tus redes -->
+    <div class="sociales">
+      <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+      <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">👍</a>
+      <a href="https://tripadvisor.com/" target="_blank" rel="noopener" aria-label="Tripadvisor">🦉</a>
+    </div>
+    <p class="legal">© <span id="anio"></span> La Huerta · Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<!-- ✏️ EDITA: tu número de WhatsApp (con código de país, sin + ni espacios) -->
+<a class="flotante" id="whatsapp-flotante" href="https://wa.me/34600000000" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8zM20.5 3.5C18.2 1.2 15.2 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.4z"/></svg>
+</a>
+
+<script>
+// ✏️ EDITA: tu número de WhatsApp para las reservas
+const WHATSAPP = "34600000000";
+const RESTAURANTE = "La Huerta";
+
+document.getElementById("anio").textContent = new Date().getFullYear();
+
+// Menú: fondo al hacer scroll
+const nav = document.getElementById("nav");
+const alScroll = () => nav.classList.toggle("solida", scrollY > 40);
+addEventListener("scroll", alScroll); alScroll();
+
+// Menú móvil
+const menu = document.getElementById("menu"), hamb = document.getElementById("hamburguesa");
+hamb.addEventListener("click", () => {
+  const abierto = menu.classList.toggle("abierto");
+  nav.classList.toggle("menu-abierto", abierto);
+  hamb.setAttribute("aria-expanded", abierto);
+});
+menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  menu.classList.remove("abierto"); nav.classList.remove("menu-abierto");
+}));
+
+// Pestañas de la carta
+document.querySelectorAll(".pestana").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".pestana, .platos").forEach(el => el.classList.remove("activa"));
+  b.classList.add("activa");
+  document.getElementById(b.dataset.pestana).classList.add("activa");
+}));
+
+// Reservas por WhatsApp
+const hoy = new Date().toISOString().split("T")[0];
+document.getElementById("r-fecha").min = hoy;
+document.getElementById("form-reserva").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value;
+  const fecha = new Date(v("r-fecha") + "T12:00").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
+  const texto = `¡Hola ${RESTAURANTE}! Me gustaría reservar:\n👤 ${v("r-nombre")}\n📅 ${fecha}\n🕐 ${v("r-hora")}\n👥 ${v("r-personas")} personas`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
+});
+
+// Aparición al hacer scroll
+const obs = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add("visible"); obs.unobserve(en.target); }
+}), { threshold: .12 });
+document.querySelectorAll(".revelar").forEach(el => obs.observe(el));
+</script>
+<!-- Aviso añadido para el portfolio -->
+<a href="/proyectos/kit-de-productos/" style="position:fixed;left:12px;bottom:12px;z-index:99999;display:inline-flex;gap:8px;align-items:center;padding:9px 14px;border-radius:999px;background:#13232b;color:#f3f5f4;font:600 13px/1.2 system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgb(0 0 0/.3)"><span style="width:9px;height:9px;border-radius:50%;background:#e2643b"></span>Demo · plantilla a la venta · Ithaisa Sánchez</a>
+</body>
+</html>
