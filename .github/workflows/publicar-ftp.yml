@@ -46,6 +46,8 @@ jobs:
           esac
 
       - name: Subir a Piensa por SFTP
+        # Si el servidor no responde, mejor fallar que quedarse colgado
+        timeout-minutes: 10
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -56,6 +58,8 @@ jobs:
           # mirror -R sube dist/ a la carpeta; --delete quita solo archivos viejos de ESA carpeta
           lftp --env-password -u "$FTP_USERNAME" "sftp://$FTP_SERVER" -e "
             set sftp:auto-confirm yes;
-            set net:max-retries 2;
+            set net:timeout 30;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 10;
             mirror --reverse --delete --verbose=1 dist/ $FTP_DIR;
             bye"
