@@ -8,6 +8,8 @@ import { perfil, experiencia, formacion, habilidades, idiomas } from '../data/pe
 
 const proyectos = (await getCollection('proyectos')).sort((a, b) => a.data.orden - b.data.orden);
 const destacado = proyectos.find((p) => p.data.destacado) ?? proyectos[0];
+// Dos proyectos más asoman detrás de la captura principal, como un abanico de cartas
+const atras = proyectos.filter((p) => p.id !== destacado.id).slice(0, 2);
 
 // Datos estructurados para buscadores (schema.org)
 const personaJsonLd = {
@@ -43,14 +45,35 @@ const personaJsonLd = {
         </div>
       </div>
 
-      <a class="browser" href={`/proyectos/${destacado.id}/`}>
-        <span class="visually-hidden">Ver el proyecto {destacado.data.titulo}</span>
-        <div class="chrome" aria-hidden="true">
-          <span></span><span></span><span></span>
-          <small>{destacado.data.demo?.replace('https://', '')}</small>
-        </div>
-        <Image src={destacado.data.imagen} alt="" widths={[480, 800, 1100]} sizes="(min-width: 900px) 480px, 100vw" loading="eager" />
-      </a>
+      <div class="abanico">
+        {
+          atras.map((p, i) => (
+            <div class={`browser carta atras a${i}`} aria-hidden="true">
+              {/* Variedad: la de la izquierda tipo Mac, la de la derecha tipo Windows */}
+              {i === 0 ? (
+                <div class="chrome mac">
+                  <span /><span /><span />
+                  <small>{p.data.demo?.replace('https://', '')}</small>
+                </div>
+              ) : (
+                <div class="chrome win">
+                  <small>{p.data.demo?.replace('https://', '')}</small>
+                  <i class="ctl min" /><i class="ctl max" /><i class="ctl close" />
+                </div>
+              )}
+              <Image src={p.data.imagen} alt="" widths={[480, 800]} sizes="(min-width: 900px) 440px, 90vw" />
+            </div>
+          ))
+        }
+        <a class="browser carta frente" href={`/proyectos/${destacado.id}/`}>
+          <span class="visually-hidden">Ver el proyecto {destacado.data.titulo}</span>
+          <div class="chrome win" aria-hidden="true">
+            <small>{destacado.data.demo?.replace('https://', '')}</small>
+            <i class="ctl min"></i><i class="ctl max"></i><i class="ctl close"></i>
+          </div>
+          <Image src={destacado.data.imagen} alt="" widths={[480, 800, 1100]} sizes="(min-width: 900px) 480px, 100vw" loading="eager" />
+        </a>
+      </div>
     </div>
 
     <div class="wrap">
@@ -367,6 +390,41 @@ const personaJsonLd = {
   .browser:hover {
     transform: rotate(0deg) translateY(-4px);
   }
+  /* Abanico: la captura principal delante y dos proyectos asomando detrás */
+  .abanico {
+    display: grid;
+    padding: 9% 13% 7% 11%;
+  }
+  .carta {
+    grid-area: 1 / 1;
+  }
+  .frente {
+    position: relative;
+    z-index: 1;
+  }
+  .atras {
+    filter: brightness(0.82) saturate(0.9);
+    transform-origin: 50% 100%;
+    transition: transform 0.3s;
+  }
+  .a0 {
+    transform: rotate(-9deg) translate(-17%, 6%) scale(0.86);
+  }
+  .a1 {
+    transform: rotate(8deg) translate(17%, -13%) scale(0.84);
+  }
+  .abanico:hover .a0 {
+    transform: rotate(-12deg) translate(-21%, 7%) scale(0.86);
+  }
+  .abanico:hover .a1 {
+    transform: rotate(11deg) translate(21%, -15%) scale(0.84);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .browser,
+    .atras {
+      transition: none;
+    }
+  }
   .chrome {
     display: flex;
     align-items: center;
@@ -382,6 +440,60 @@ const personaJsonLd = {
   }
   .chrome span:first-child {
     background: var(--warm);
+  }
+  /* Las ventanas de Windows tienen las esquinas menos redondeadas */
+  .browser:has(.chrome.win) {
+    border-radius: 8px;
+  }
+  /* Barra tipo Windows: dirección a la izquierda y minimizar, maximizar y cerrar a la derecha */
+  .chrome.win {
+    gap: 0;
+    padding: 0 0 0 14px;
+    background: #f3f3f3;
+  }
+  .chrome.win small {
+    margin: 0 auto 0 0;
+    padding: 9px 0;
+  }
+  .ctl {
+    position: relative;
+    flex: none;
+    width: 38px;
+    height: 32px;
+  }
+  .ctl::before,
+  .ctl::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+  }
+  .ctl.min::before {
+    width: 10px;
+    border-top: 1.2px solid #4e5f66;
+  }
+  .ctl.max::before {
+    width: 9px;
+    height: 9px;
+    border: 1.2px solid #4e5f66;
+    border-radius: 1px;
+  }
+  .ctl.close::before,
+  .ctl.close::after {
+    width: 12px;
+    border-top: 1.2px solid #4e5f66;
+    rotate: 45deg;
+  }
+  .ctl.close::after {
+    rotate: -45deg;
+  }
+  .browser:hover .ctl.close {
+    background: #c42b1c;
+  }
+  .browser:hover .ctl.close::before,
+  .browser:hover .ctl.close::after {
+    border-color: #fff;
   }
   .chrome small {
     margin-left: 10px;
