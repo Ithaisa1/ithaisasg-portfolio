@@ -1,0 +1,39 @@
+{
+  "nombre": "Ithaisa Sánchez González",
+  "titulo": "Desarrolladora Frontend",
+  "subtitulo": "Interfaces web, UX/UI y experiencias digitales",
+  "ubicacion": "Gran Canaria",
+  "disponibilidad": "Disponible desde el 7 de enero de 2027",
+  "presentacion": "Desarrolladora web junior con formación técnica (DAW y bootcamp full stack) y experiencia en empresas del sector. Construyo interfaces con HTML, CSS, JavaScript, Astro y React, cuidando que sean accesibles y fáciles de usar.",
+  "destacados": [
+    {
+      "etiqueta": "Ahora",
+      "texto": "Desarrolladora web en Qraneos",
+      "detalle": "En equipo con Git, GitLab y Jira"
+    },
+    {
+      "etiqueta": "Formación",
+      "texto": "Técnico Superior en DAW",
+      "detalle": "Y bootcamp Full Stack + IA (Ironhack)"
+    },
+    {
+      "etiqueta": "Proyectos",
+      "texto": "3 webs publicadas",
+      "detalle": "Astro, React y Node.js, en Vercel"
+    }
+  ],
+  "sobreMiTitulo": "Formación y experiencia en desarrollo web",
+  "sobreMi": [
+    "Mi primer trabajo con la web fue en 2019, manteniendo páginas y contenidos en Wonka Producciones, el mismo año en que obtuve el certificado de Desarrollo de Aplicaciones con Tecnologías Web. Después me formé como Técnico en Sistemas Microinformáticos y Redes y como Técnico Superior en Desarrollo de Aplicaciones Web.",
+    "He trabajado con WordPress, Divi, Elementor, SEO y contenidos en Web Las Palmas y Etnonautas, y en 2026 completé el bootcamp Full Stack + IA de Ironhack con la FULP. Ahora trabajo en Qraneos con un contrato de formación en alternancia: katas, web scraping con TypeScript y documentación técnica, en equipo con Git, GitLab y Jira.",
+    "También tengo formación y experiencia en diseño gráfico, que me ayuda a cuidar la parte visual de las interfaces."
+  ],
+  "busco": "Tengo formación técnica y experiencia en empresas de desarrollo web, y busco un puesto como desarrolladora frontend junior en un equipo donde el diseño y la experiencia de usuario importen.",
+  "contacto": {
+    "email": "ithaisasanchezgonzalez@gmail.com",
+    "telefono": "+34 672 075 340",
+    "linkedin": "https://www.linkedin.com/in/ithaisa-sg/",
+    "github": "https://github.com/Ithaisa1",
+    "cv": null
+  }
+}

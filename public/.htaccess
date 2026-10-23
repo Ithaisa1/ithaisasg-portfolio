@@ -1,0 +1,4 @@
+# Configuración para el hosting de Piensa (Apache). Vercel ignora este archivo.
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+Options -Indexes

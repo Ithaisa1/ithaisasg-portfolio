@@ -1,0 +1,61 @@
+# Publica la web en el hosting de Piensa (ithaisasg.twincore.es) cada vez que cambia main:
+# tanto si el cambio viene del panel /admin como de un git push.
+# Los datos de conexión están guardados como secretos del repositorio
+# (Settings → Secrets and variables → Actions):
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD y FTP_DIR (la carpeta de ithaisasg, terminada en /).
+# La conexión es por SFTP (cifrada), igual que en FileZilla.
+
+name: Publicar en Piensa (SFTP)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # permite lanzarlo a mano desde la pestaña Actions
+
+concurrency:
+  group: publicar-ftp
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Comprobar y construir la web
+        run: npm run ci
+
+      - name: Seguro: solo se publica en la carpeta de ithaisasg
+        env:
+          FTP_DIR: ${{ secrets.FTP_DIR }}
+        run: |
+          case "$FTP_DIR" in
+            */ithaisasg/) echo "Carpeta de destino correcta." ;;
+            *) echo "FTP_DIR debe terminar en /ithaisasg/. No se publica nada."; exit 1 ;;
+          esac
+
+      - name: Subir a Piensa por SFTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_DIR }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          # mirror -R sube dist/ a la carpeta; --delete quita solo archivos viejos de ESA carpeta
+          lftp --env-password -u "$FTP_USERNAME" "sftp://$FTP_SERVER" -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            mirror --reverse --delete --verbose=1 dist/ $FTP_DIR;
+            bye"

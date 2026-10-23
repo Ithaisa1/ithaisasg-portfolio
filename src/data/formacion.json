@@ -1,0 +1,59 @@
+{
+  "grupos": [
+    {
+      "grupo": "Titulaciones",
+      "items": [
+        {
+          "titulo": "Técnico Superior en Desarrollo de Aplicaciones Web (DAW)",
+          "centro": "IES Ana Luisa Benítez",
+          "fechas": "2022 – 2024"
+        },
+        {
+          "titulo": "Técnico en Sistemas Microinformáticos y Redes (SMR)",
+          "centro": "Ciclo de grado medio",
+          "fechas": "2019 – 2021"
+        }
+      ]
+    },
+    {
+      "grupo": "Programas y certificados",
+      "items": [
+        {
+          "titulo": "Bootcamp Desarrollo Web Full Stack + IA",
+          "centro": "Ironhack · Escuela de Programadores de la FULP",
+          "fechas": "2026"
+        },
+        {
+          "titulo": "Programa Diginnova (180 h)",
+          "centro": "FULP · ULPGC",
+          "fechas": "oct 2024 – abr 2025"
+        },
+        {
+          "titulo": "Diseño de Productos Gráficos",
+          "centro": "Certificado de profesionalidad, nivel 3",
+          "fechas": "2023"
+        },
+        {
+          "titulo": "Desarrollo de Aplicaciones con Tecnologías Web",
+          "centro": "Certificado de profesionalidad, nivel 3",
+          "fechas": "2019"
+        }
+      ]
+    },
+    {
+      "grupo": "Cursos",
+      "items": [
+        {
+          "titulo": "Programación en Python (100 h)",
+          "centro": "CICCA",
+          "fechas": ""
+        },
+        {
+          "titulo": "Symfony, framework de PHP (150 h)",
+          "centro": "CIP",
+          "fechas": ""
+        }
+      ]
+    }
+  ]
+}

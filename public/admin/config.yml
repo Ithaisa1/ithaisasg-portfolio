@@ -1,0 +1,205 @@
+# Configuración del panel de contenido (Sveltia CMS).
+# Cada cambio que se guarda en /admin se convierte en un commit en GitHub,
+# y la web se vuelve a construir y publicar sola.
+
+backend:
+  name: github
+  repo: Ithaisa1/ithaisasg-portfolio
+  branch: main
+  commit_messages:
+    create: 'Contenido: crea {{collection}} «{{slug}}»'
+    update: 'Contenido: actualiza {{collection}} «{{slug}}»'
+    delete: 'Contenido: borra {{collection}} «{{slug}}»'
+    uploadMedia: 'Contenido: sube {{path}}'
+    deleteMedia: 'Contenido: borra {{path}}'
+
+site_url: https://ithaisasg.twincore.es
+display_url: https://ithaisasg.twincore.es
+
+# Archivos generales (por ejemplo, el CV en PDF): van a public/ y se sirven desde la raíz.
+# Las capturas de proyectos tienen su propia carpeta (ver la colección «proyectos»).
+media_folder: public
+public_folder: /
+
+output:
+  omit_empty_optional_fields: true
+
+collections:
+  # ---------- Proyectos: un archivo por proyecto ----------
+  - name: proyectos
+    label: Proyectos
+    label_singular: Proyecto
+    folder: src/content/proyectos
+    # Capturas: se guardan en src/assets/proyectos, junto a las que ya hay
+    media_folder: ../../assets/proyectos
+    public_folder: ../../assets/proyectos
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: '{{titulo}}'
+    identifier_field: titulo
+    summary: '{{orden}}. {{titulo}} · {{tipo}}'
+    sortable_fields: [orden, titulo]
+    fields:
+      - { name: titulo, label: Título, widget: string }
+      - name: resumen
+        label: Resumen
+        widget: text
+        hint: Una o dos frases. Es lo que se ve en la tarjeta de la portada.
+      - name: tipo
+        label: Tipo
+        widget: string
+        hint: 'Por ejemplo: «Proyecto personal», «Proyecto final del bootcamp» o «Proyecto individual».'
+      - { name: fecha, label: Fecha, widget: string, hint: 'Por ejemplo: «Octubre 2026».' }
+      - { name: estado, label: Estado, widget: string, hint: 'Por ejemplo: «Publicado» o «En desarrollo».' }
+      - name: orden
+        label: Orden
+        widget: number
+        value_type: int
+        min: 1
+        hint: 1 = el primero de la lista.
+      - name: destacado
+        label: Destacado
+        widget: boolean
+        default: false
+        hint: Si está activado, ocupa todo el ancho en la portada. Mejor solo uno.
+      - name: color
+        label: Color de fondo de la tarjeta
+        widget: color
+        default: '#13232b'
+        hint: Usa un color oscuro; va detrás de la captura.
+      - name: tecnologias
+        label: Tecnologías
+        widget: list
+        field: { name: tecnologia, label: Tecnología, widget: string }
+      - { name: demo, label: Enlace a la web publicada, widget: string, required: false, hint: 'Dirección completa, empezando por https://' }
+      - { name: demoNota, label: Nota del enlace a la web, widget: string, required: false, hint: 'Por ejemplo: «Usuario de prueba abajo».' }
+      - { name: codigo, label: Enlace al código (GitHub), widget: string, required: false, hint: 'Déjalo vacío si el repositorio es privado.' }
+      - { name: codigoNota, label: Nota sobre el código, widget: string, required: false, hint: 'Por ejemplo: «Repositorio privado · acceso bajo petición».' }
+      - name: imagen
+        label: Captura
+        widget: image
+        hint: Captura de la web en horizontal (por ejemplo 1440 × 900).
+      - name: imagenAlt
+        label: Descripción de la captura
+        widget: text
+        hint: Describe lo que se ve, para personas que usan lector de pantalla.
+      - name: body
+        label: Ficha del proyecto
+        widget: markdown
+        hint: 'Usa títulos «##» para cada apartado: El problema, Qué hace, Mi aportación…'
+
+  # ---------- Datos personales: un formulario por sección ----------
+  - name: perfil
+    label: Mis datos
+    files:
+      - name: general
+        label: Presentación y contacto
+        file: src/data/perfil.json
+        format: json
+        fields:
+          - { name: nombre, label: Nombre, widget: string }
+          - { name: titulo, label: Título, widget: string }
+          - { name: subtitulo, label: Subtítulo, widget: string }
+          - { name: ubicacion, label: Ubicación, widget: string }
+          - { name: disponibilidad, label: Disponibilidad, widget: string, hint: 'Empieza por «Disponible…». También se usa en el bloque de contacto.' }
+          - { name: presentacion, label: Presentación, widget: text }
+          - name: destacados
+            label: Datos destacados (debajo de la presentación)
+            widget: list
+            summary: '{{etiqueta}}: {{texto}}'
+            fields:
+              - { name: etiqueta, label: Etiqueta, widget: string }
+              - { name: texto, label: Texto, widget: string }
+              - { name: detalle, label: Detalle, widget: string }
+          - { name: sobreMiTitulo, label: Título de «Sobre mí», widget: string }
+          - name: sobreMi
+            label: Sobre mí (párrafos)
+            widget: list
+            field: { name: parrafo, label: Párrafo, widget: text }
+          - { name: busco, label: Texto del bloque de contacto, widget: text }
+          - name: contacto
+            label: Contacto
+            widget: object
+            fields:
+              - { name: email, label: Email, widget: string }
+              - { name: telefono, label: Teléfono, widget: string }
+              - { name: linkedin, label: LinkedIn, widget: string }
+              - { name: github, label: GitHub, widget: string }
+              - name: cv
+                label: CV en PDF
+                widget: file
+                required: false
+                accept: application/pdf
+                hint: Si subes un PDF, aparece el botón «Descargar» en el contacto.
+
+      - name: experiencia
+        label: Experiencia
+        file: src/data/experiencia.json
+        format: json
+        fields:
+          - name: puestos
+            label: Puestos (el más reciente primero)
+            widget: list
+            summary: '{{fechas}} · {{puesto}} en {{empresa}}'
+            fields:
+              - { name: fechas, label: Fechas, widget: string, hint: 'Por ejemplo: «abr – sep 2025».' }
+              - { name: puesto, label: Puesto, widget: string }
+              - { name: empresa, label: Empresa, widget: string }
+              - { name: tipo, label: Tipo de contrato, widget: string, required: false, hint: 'Por ejemplo: «Prácticas formativas».' }
+              - { name: actual, label: Es mi trabajo actual, widget: boolean, required: false, default: false }
+              - name: tareas
+                label: Tareas
+                widget: list
+                field: { name: tarea, label: Tarea, widget: text }
+
+      - name: formacion
+        label: Formación
+        file: src/data/formacion.json
+        format: json
+        fields:
+          - name: grupos
+            label: Grupos
+            widget: list
+            summary: '{{grupo}}'
+            fields:
+              - { name: grupo, label: Nombre del grupo, widget: string }
+              - name: items
+                label: Estudios
+                widget: list
+                summary: '{{titulo}}'
+                fields:
+                  - { name: titulo, label: Título, widget: string }
+                  - { name: centro, label: Centro, widget: string }
+                  - { name: fechas, label: Fechas, widget: string, required: false }
+
+      - name: habilidades
+        label: Habilidades
+        file: src/data/habilidades.json
+        format: json
+        fields:
+          - name: grupos
+            label: Grupos
+            widget: list
+            summary: '{{grupo}}'
+            fields:
+              - { name: grupo, label: Nombre del grupo, widget: string }
+              - { name: explicacion, label: Explicación, widget: string }
+              - name: items
+                label: Herramientas
+                widget: list
+                field: { name: item, label: Herramienta, widget: string }
+
+      - name: idiomas
+        label: Idiomas
+        file: src/data/idiomas.json
+        format: json
+        fields:
+          - name: idiomas
+            label: Idiomas
+            widget: list
+            summary: '{{idioma}} ({{nivel}})'
+            fields:
+              - { name: idioma, label: Idioma, widget: string }
+              - { name: nivel, label: Nivel, widget: string }

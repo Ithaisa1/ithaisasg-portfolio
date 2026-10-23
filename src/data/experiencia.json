@@ -1,0 +1,57 @@
+{
+  "puestos": [
+    {
+      "fechas": "jul 2026 – ene 2027",
+      "puesto": "Desarrolladora web",
+      "empresa": "Qraneos",
+      "tipo": "Contrato de formación en alternancia",
+      "actual": true,
+      "tareas": [
+        "Katas de programación en JavaScript.",
+        "Web scraping con TypeScript.",
+        "Documentación técnica y scripts de apoyo en un proyecto en equipo.",
+        "Trabajo en equipo con Git y GitLab (ramas, commits y merge requests) y seguimiento de tareas en Jira."
+      ]
+    },
+    {
+      "fechas": "abr – sep 2025",
+      "puesto": "Desarrolladora de contenido web y SEO",
+      "empresa": "Etnonautas",
+      "tipo": "Beca del programa Diginnova",
+      "tareas": [
+        "Mantenimiento de webs en WordPress con Divi y Elementor, y gestión de contenidos traducidos.",
+        "Creación de contenidos optimizados y SEO on-page con SEMrush.",
+        "Gestión de perfiles de Google Business Profile.",
+        "Proyectos del Kit Digital: gestión documental y control de cumplimiento.",
+        "Apoyo en publicidad digital y estrategias de visibilidad online."
+      ]
+    },
+    {
+      "fechas": "mar – may 2024",
+      "puesto": "Desarrolladora web",
+      "empresa": "Web Las Palmas",
+      "tipo": "Prácticas formativas",
+      "tareas": [
+        "Mantenimiento web y creación de contenidos optimizados para SEO.",
+        "Apoyo en proyectos del Kit Digital."
+      ]
+    },
+    {
+      "fechas": "2022",
+      "puesto": "Diseñadora gráfica",
+      "empresa": "Gráficas Abemak",
+      "tareas": [
+        "Carteles, logotipos y contenido digital.",
+        "Preparación de piezas para impresión con GIMP y CorelDRAW."
+      ]
+    },
+    {
+      "fechas": "2019",
+      "puesto": "Diseñadora de páginas web",
+      "empresa": "Wonka Producciones",
+      "tareas": [
+        "Mantenimiento de páginas web y edición de contenidos digitales."
+      ]
+    }
+  ]
+}
