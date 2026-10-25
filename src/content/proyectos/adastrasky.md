@@ -4,7 +4,7 @@ resumen: Plataforma de astroturismo para Canarias con mapa de zonas de observaci
 tipo: Proyecto final del bootcamp
 fecha: Junio 2026 · mejorado en octubre 2026
 estado: Publicado · con usuario de prueba
-orden: 2
+orden: 3
 color: "#1e1b4b"
 tecnologias: [React, Vite, Tailwind CSS, Leaflet, i18next, Node.js, Express, PostgreSQL, Python, FastAPI, LangGraph, Vercel]
 demo: https://adastrasky.vercel.app

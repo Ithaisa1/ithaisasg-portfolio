@@ -4,7 +4,7 @@ resumen: Buscador de videojuegos que consume la API pública de RAWG, con filtro
 tipo: Proyecto individual
 fecha: Abril 2026
 estado: Terminado
-orden: 5
+orden: 6
 color: "#3b2a6b"
 tecnologias: [React, Vite, React Router, Context API, CSS Modules, Vitest, Testing Library, Vercel]
 demo: https://game-scape-mu.vercel.app
