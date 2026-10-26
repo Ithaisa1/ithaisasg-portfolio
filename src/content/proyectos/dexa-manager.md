@@ -5,13 +5,13 @@ tipo: Proyecto del bootcamp
 fecha: Mayo 2026 · ampliado en octubre 2026
 estado: Publicado · con web de demo
 orden: 3
-color: "#1e1440"
+color: "#3a2212"
 tecnologias: [React, Node.js, Express, PostgreSQL, Prisma, Vercel, Vite, React Router, i18next, Zod, JWT, Jest, Supertest, PWA, Neon, GitHub Actions]
 demo: https://dexa-manager-demo.vercel.app
 demoNota: Entra con un clic como admin o como usuaria · los datos se reinician cada noche
 codigo: https://github.com/Ithaisa1/dexa-manager
 imagen: ../../assets/proyectos/dexa-manager.png
-imagenAlt: Dashboard de Dexa Manager en modo oscuro con el gasto mensual (199,50 €) y un gráfico de barras de los próximos 12 meses, la lista de renovaciones próximas (Figma, ChatGPT, Adobe Creative Cloud y Spotify) y cuatro tarjetas con el total de herramientas, el próximo pago, la más cara y las categorías.
+imagenAlt: Dashboard de Dexa Manager en modo oscuro, con tonos cobre y ocre, mostrando el gasto mensual (199,50 €) y un gráfico de barras de los próximos 12 meses, la lista de renovaciones próximas (Figma, ChatGPT, Adobe Creative Cloud y Spotify) y cuatro tarjetas con el total de herramientas, el próximo pago, la más cara y las categorías.
 ---
 
 ## Pruébalo
@@ -42,7 +42,7 @@ Entre IDEs, apps de diseño, IA, música y almacenamiento en la nube, es fácil 
 - Lo empecé como proyecto individual del bootcamp Full Stack + IA de Ironhack (unas 65 horas, organizado en Trello y medido con Toggl Track) y después lo amplié hasta convertirlo en una app completa y publicada.
 - Diseñé el modelo de datos, la API REST y las pantallas, y decidí qué entraba en cada versión.
 - Llevé el proyecto de Render a Vercel y Neon, y monté la web de demo pública, separada de la de producción y con su propia base de datos.
-- Hice el rediseño «Aurora»: identidad visual, logo, iconos y modo oscuro por defecto.
+- Diseñé la identidad visual «Cosecha», una paleta de otoño en la que cada color significa algo: cobre para el dinero, ocre para una renovación cercana, granate para cobros y alertas, y musgo para lo que está en orden. Cada categoría tiene además su propio tono (diseño en terracota, IA en ciruela, finanzas en oro viejo…). También hice el logo y los iconos.
 - Probé cada entrega en la app real, en ordenador y en móvil.
 - El código de las últimas versiones se hizo con asistencia de IA (Claude Code). Yo dirigí el trabajo, revisé cada cambio y validé el resultado.
 

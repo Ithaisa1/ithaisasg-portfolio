@@ -5,7 +5,7 @@ tipo: Bootcamp project
 fecha: May 2026 · extended in October 2026
 estado: Published · with a demo site
 demoNota: One-click sign-in as admin or user · data resets every night
-imagenAlt: Dexa Manager dashboard in dark mode showing monthly spend (€199.50) with a bar chart for the next 12 months, the list of upcoming renewals (Figma, ChatGPT, Adobe Creative Cloud and Spotify) and four cards with total tools, next payment, the most expensive tool and categories.
+imagenAlt: Dexa Manager dashboard in dark mode with copper and ochre tones, showing monthly spend (€199.50) with a bar chart for the next 12 months, the list of upcoming renewals (Figma, ChatGPT, Adobe Creative Cloud and Spotify) and four cards with total tools, next payment, the most expensive tool and categories.
 ---
 
 ## Try it
@@ -36,7 +36,7 @@ Between IDEs, design apps, AI tools, music and cloud storage, it's easy to lose 
 - I started it as an individual project for the Ironhack Full Stack + AI bootcamp (about 65 hours, planned in Trello and tracked with Toggl Track) and later extended it into a complete, published app.
 - I designed the data model, the REST API and the screens, and decided what went into each version.
 - I moved the project from Render to Vercel and Neon, and set up the public demo site, separate from production and with its own database.
-- I did the "Aurora" redesign: visual identity, logo, icons and dark mode by default.
+- I designed the "Cosecha" (harvest) visual identity, an autumn palette where each colour means something: copper for money, ochre for an upcoming renewal, burgundy for charges and alerts, and moss for what is in order. Each category also has its own shade (design in terracotta, AI in plum, finance in old gold…). I also made the logo and icons.
 - I tested every release in the real app, on desktop and mobile.
 - The code for the latest versions was written with AI assistance (Claude Code). I led the work, reviewed every change and validated the result.
 
