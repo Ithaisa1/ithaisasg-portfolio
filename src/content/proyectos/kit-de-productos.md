@@ -4,7 +4,7 @@ resumen: "Cinco productos listos para vender a quien necesita una web sin saber 
 tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Terminado · preparado para la venta
-orden: 5
+orden: 6
 color: "#22302a"
 tecnologias: [HTML, CSS, JavaScript, Diseño responsive]
 demo: https://ithaisasg.twincore.es/demos/kit/restaurante/

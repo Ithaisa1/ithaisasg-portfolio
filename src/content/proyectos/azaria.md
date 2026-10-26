@@ -4,7 +4,7 @@ resumen: App para comprobar boletos de lotería escaneando su código QR, guarda
 tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Demo pública · app completa de uso personal
-orden: 4
+orden: 5
 color: "#0b1530"
 tecnologias: [React, TypeScript, Vite, React Router, Vitest, Testing Library, PWA, GitHub Actions]
 demo: https://ithaisasg.twincore.es/demos/azaria/
