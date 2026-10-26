@@ -1,7 +1,7 @@
 ---
 titulo: Dexa Manager
 resumen: App full-stack para tener todas tus herramientas digitales y suscripciones en un solo sitio. Muestra cuánto gastas al mes, qué se renueva y cuándo, y avisa por email antes de que te cobren.
-tipo: Proyecto individual
+tipo: Proyecto del bootcamp
 fecha: Mayo 2026 · ampliado en octubre 2026
 estado: Publicado · con web de demo
 orden: 3
@@ -39,7 +39,7 @@ Entre IDEs, apps de diseño, IA, música y almacenamiento en la nube, es fácil 
 
 ## Mi aportación
 
-- Lo empecé como proyecto individual (unas 65 horas, organizado en Trello y medido con Toggl Track) y después lo amplié hasta convertirlo en una app completa y publicada.
+- Lo empecé como proyecto individual del bootcamp Full Stack + IA de Ironhack (unas 65 horas, organizado en Trello y medido con Toggl Track) y después lo amplié hasta convertirlo en una app completa y publicada.
 - Diseñé el modelo de datos, la API REST y las pantallas, y decidí qué entraba en cada versión.
 - Llevé el proyecto de Render a Vercel y Neon, y monté la web de demo pública, separada de la de producción y con su propia base de datos.
 - Hice el rediseño «Aurora»: identidad visual, logo, iconos y modo oscuro por defecto.
