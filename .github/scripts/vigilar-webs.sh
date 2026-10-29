@@ -16,7 +16,7 @@ gh label create "$ETIQUETA" --color B60205 --description "Una web vigilada no re
 
 # Devuelve 0 si la web está bien. Si no, deja el motivo en $MOTIVO.
 comprobar() {
-  local url=$1 texto=$2 cuerpo codigo
+  local url=$1 texto=$2 edad=${3:-} cuerpo codigo generado dias
   cuerpo=$(mktemp)
   codigo=$(curl -sL --max-time 20 -o "$cuerpo" -w '%{http_code}' "$url" 2>/dev/null) || codigo=000
   if [[ $codigo == 000 ]]; then
@@ -28,22 +28,31 @@ comprobar() {
   else
     MOTIVO=""
   fi
+  # Opcional: el JSON trae «generatedAt» y no puede tener más de N días (datos que dejan de actualizarse).
+  if [[ -z $MOTIVO && -n $edad ]]; then
+    generado=$(jq -r '.generatedAt // empty' "$cuerpo" 2>/dev/null)
+    if [[ -z $generado ]] || ! dias=$(( ( $(date +%s) - $(date -d "$generado" +%s) ) / 86400 )); then
+      MOTIVO="no se puede leer la fecha de los datos («generatedAt»)"
+    elif (( dias > edad )); then
+      MOTIVO="los datos tienen $dias días (máximo $edad): la actualización automática no está funcionando"
+    fi
+  fi
   rm -f "$cuerpo"
   [[ -z $MOTIVO ]]
 }
 
 total=0; bien=0
-while IFS='|' read -r nombre url texto; do
-  nombre=$(echo "$nombre" | xargs); url=$(echo "$url" | xargs); texto=$(echo "$texto" | xargs)
+while IFS='|' read -r nombre url texto edad; do
+  nombre=$(echo "$nombre" | xargs); url=$(echo "$url" | xargs); texto=$(echo "$texto" | xargs); edad=$(echo "$edad" | xargs)
   [[ -z $nombre || $nombre == \#* ]] && continue
   total=$((total + 1))
 
   # Un fallo suelto no cuenta: se reintenta una vez antes de darlo por caído.
   ok=0
-  if comprobar "$url" "$texto"; then ok=1
+  if comprobar "$url" "$texto" "$edad"; then ok=1
   else
     sleep "$ESPERA"
-    comprobar "$url" "$texto" && ok=1
+    comprobar "$url" "$texto" "$edad" && ok=1
   fi
 
   TITULO="Web caída: $nombre"
