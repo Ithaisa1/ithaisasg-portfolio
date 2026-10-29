@@ -1,5 +1,6 @@
-# Una web por línea:  nombre | dirección | texto que debe aparecer (opcional)
+# Una web por línea:  nombre | dirección | texto que debe aparecer (opcional) | días máximos de antigüedad (opcional)
 # El texto sirve para detectar páginas en blanco o con un error que aun así responde «200».
+# Los días máximos solo valen para archivos JSON con el campo «generatedAt»: avisa si los datos se quedan viejos.
 # Las líneas que empiezan por # se ignoran. Para vigilar otra web, añade una línea aquí.
 Portfolio            | https://ithaisasg.twincore.es                      | Ithaisa Sánchez
 Portfolio (Vercel)   | https://ithaisasg-portfolio.vercel.app             | Ithaisa Sánchez
@@ -9,5 +10,5 @@ Canarias Fácil       | https://canariasfacil.vercel.app                   | Can
 AdAstraSky           | https://adastrasky.vercel.app                      | AdAstraSky
 Dexa Manager         | https://dexa-manager-demo.vercel.app               | Dexa Manager
 azarIA (demo)        | https://ithaisasg.twincore.es/demos/azaria/        | AzarIA
-# azarIA en producción: pon aquí su dirección de Vercel cuando la tengas, por ejemplo
-# azarIA              | https://TU-DIRECCION.vercel.app                    | AzarIA
+azarIA               | https://azariaapp.vercel.app                       | AzarIA
+azarIA (datos)       | https://azariaapp.vercel.app/latest.json           | generatedAt | 4
