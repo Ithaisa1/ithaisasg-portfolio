@@ -1,0 +1,32 @@
+# Vigila mis webs cada 2 horas, desde los servidores de GitHub (funciona con mi ordenador apagado).
+# Si una web se cae, abre un aviso «Web caída: …» y GitHub me escribe por correo; cuando vuelve a funcionar,
+# lo cierra solo. La lista de webs está en .github/webs-a-vigilar.txt.
+#
+# Gasta unos 360 minutos de Actions al mes (cada comprobación cuenta como 1 minuto). Si hiciera falta
+# ahorrar, se cambia la frecuencia de abajo. GitHub desactiva los horarios de un repositorio sin actividad
+# durante 60 días: si pasara, se reactiva desde la pestaña Actions.
+name: Vigilar webs
+
+on:
+  schedule:
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: vigilar-webs
+  cancel-in-progress: false
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Comprobar las webs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: .github/scripts/vigilar-webs.sh
