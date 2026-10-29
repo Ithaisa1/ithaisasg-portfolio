@@ -1,0 +1,13 @@
+# Una web por línea:  nombre | dirección | texto que debe aparecer (opcional)
+# El texto sirve para detectar páginas en blanco o con un error que aun así responde «200».
+# Las líneas que empiezan por # se ignoran. Para vigilar otra web, añade una línea aquí.
+Portfolio            | https://ithaisasg.twincore.es                      | Ithaisa Sánchez
+Portfolio (Vercel)   | https://ithaisasg-portfolio.vercel.app             | Ithaisa Sánchez
+Proyenta             | https://proyenta.vercel.app                        | Proyenta
+Proyenta calculadora | https://proyenta.vercel.app/calculadora            | Proyenta
+Canarias Fácil       | https://canariasfacil.vercel.app                   | Canarias Fácil
+AdAstraSky           | https://adastrasky.vercel.app                      | AdAstraSky
+Dexa Manager         | https://dexa-manager-demo.vercel.app               | Dexa Manager
+azarIA (demo)        | https://ithaisasg.twincore.es/demos/azaria/        | AzarIA
+# azarIA en producción: pon aquí su dirección de Vercel cuando la tengas, por ejemplo
+# azarIA              | https://TU-DIRECCION.vercel.app                    | AzarIA
