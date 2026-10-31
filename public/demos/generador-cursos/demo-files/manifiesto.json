@@ -1,0 +1,96 @@
+{
+ "documentos": {
+  "mbz-503": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d-moodle-5.3.mbz",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d-moodle-5.3.mbz",
+   "warnings": []
+  },
+  "mbz-405": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d-moodle-4.5.mbz",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d-moodle-4.5.mbz",
+   "warnings": []
+  },
+  "scorm": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d-scorm12.zip",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d-scorm12.zip",
+   "warnings": []
+  },
+  "moodle-xml": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d-preguntas.xml",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d-preguntas.xml",
+   "warnings": []
+  },
+  "html": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d-web.zip",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d-web.zip",
+   "warnings": []
+  },
+  "docx": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d.docx",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d.docx",
+   "warnings": []
+  },
+  "pdf": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d.pdf",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d.pdf",
+   "warnings": []
+  },
+  "pptx": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d.pptx",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d.pptx",
+   "warnings": []
+  },
+  "markdown": {
+   "file": "documentos-fundamentos-de-accesibilidad-web-para-equipos-de-d.md",
+   "filename": "fundamentos-de-accesibilidad-web-para-equipos-de-d.md",
+   "warnings": []
+  }
+ },
+ "desde-cero": {
+  "mbz-503": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github-moodle-5.3.mbz",
+   "filename": "primeros-pasos-con-git-y-github-moodle-5.3.mbz",
+   "warnings": []
+  },
+  "mbz-405": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github-moodle-4.5.mbz",
+   "filename": "primeros-pasos-con-git-y-github-moodle-4.5.mbz",
+   "warnings": []
+  },
+  "scorm": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github-scorm12.zip",
+   "filename": "primeros-pasos-con-git-y-github-scorm12.zip",
+   "warnings": []
+  },
+  "moodle-xml": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github-preguntas.xml",
+   "filename": "primeros-pasos-con-git-y-github-preguntas.xml",
+   "warnings": []
+  },
+  "html": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github-web.zip",
+   "filename": "primeros-pasos-con-git-y-github-web.zip",
+   "warnings": []
+  },
+  "docx": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github.docx",
+   "filename": "primeros-pasos-con-git-y-github.docx",
+   "warnings": []
+  },
+  "pdf": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github.pdf",
+   "filename": "primeros-pasos-con-git-y-github.pdf",
+   "warnings": []
+  },
+  "pptx": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github.pptx",
+   "filename": "primeros-pasos-con-git-y-github.pptx",
+   "warnings": []
+  },
+  "markdown": {
+   "file": "desde-cero-primeros-pasos-con-git-y-github.md",
+   "filename": "primeros-pasos-con-git-y-github.md",
+   "warnings": []
+  }
+ }
+}
