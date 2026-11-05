@@ -1,0 +1,31 @@
+2:"$Sreact.fragment"
+3:"/demos/guanxe/_next/static/chunks/1ojyonws-s2g5.js"
+4:"/demos/guanxe/_next/static/chunks/24m0bh1yqfbq5.js"
+5:"/demos/guanxe/_next/static/chunks/1c2qjh5zkj5q3.js"
+6:"/demos/guanxe/_next/static/chunks/0s09ornpc5gyq.js"
+7:"/demos/guanxe/_next/static/chunks/2kgrkq9rpo-68.js"
+8:"/demos/guanxe/_next/static/chunks/0c3wlt87mnacm.js"
+9:I[28809,["$3","$4","$5","$6","$7","$8"],"default"]
+a:I[32686,["$3","$4","$5","$6","$7","$8"],"default"]
+f:"/demos/guanxe/_next/static/chunks/1-573fpwim_cf.js"
+10:I[23645,["$3","$4","$5","$6","$7","$8","$f"],"OrderTracker"]
+11:I[29947,["$3","$4","$5","$6","$7","$8"],"OutletBoundary"]
+12:"$Sreact.suspense"
+15:"ViewportBoundary"
+16:I[29947,["$3","$4","$5","$6","$7","$8"],"$15"]
+17:"MetadataBoundary"
+18:I[29947,["$3","$4","$5","$6","$7","$8"],"$17"]
+c:X
+c:C
+d:X
+e:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","div",null,{"className":"mx-auto max-w-5xl px-4 py-8","children":[["$","h1",null,{"className":"text-3xl font-bold sm:text-4xl","children":"Localizar pedido"}],["$","p",null,{"className":"mb-8 mt-1 text-muted","children":"Consulta en qué punto del trayecto está tu pedido."}],["$","$L10",null,{}]]}],[["$","script","script-0",{"src":"/demos/guanxe/_next/static/chunks/1-573fpwim_cf.js","async":true}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}],"p":"$@14","v":null,"s":"$d"}}]]
+1:[["children",{"s":"pedido","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$L9",null,{"parallelRouterKey":"children","template":["$","$La",null,{}]}]]}],"p":"$@b","v":"$c","s":"$d"},"c":"$Qe"}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#FBF7F0","media":"(prefers-color-scheme: light)"}],["$","meta","3",{"name":"theme-color","content":"#0E1621","media":"(prefers-color-scheme: dark)"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$12",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Localizar pedido · Guanxe (Concepto de rediseño)"}],["$","meta","1",{"name":"description","content":"Concepto de rediseño de un marketplace canario: moda, tecnología, hogar y productos locales de comercios de todas las islas."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}]]}]}],null]}],null]}],"p":"$@19","v":null,"s":"$d"}},"a":"$@1a","u":"$@1b","b":"4sd_f4-n_Hwybsdi55qLQ"}
+13:null
+1b:true
+d:300
+d:C
+1a:0
+b:"$undefined"
+19:"$undefined"
+14:"$undefined"
