@@ -5,6 +5,7 @@ tipo: Concepto de rediseño
 fecha: Noviembre 2026
 estado: Demo pública · concepto sin relación con la empresa
 orden: 9
+categorias: [comercio]
 color: "#0a3d62"
 tecnologias: [Next.js, React, TypeScript, Tailwind CSS, Radix UI, Framer Motion, Zustand, Playwright, axe, Lighthouse]
 demo: https://ithaisasg.twincore.es/demos/guanxe/

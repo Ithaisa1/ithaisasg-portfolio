@@ -4,6 +4,9 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+// Temas de los proyectos (según para qué sirven). Los nombres que se ven están en src/i18n.ts.
+export const TEMAS = ['autonomos', 'tramites', 'comercio', 'educacion', 'ocio'] as const;
+
 const proyectos = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/proyectos' }),
   schema: ({ image }) =>
@@ -14,6 +17,7 @@ const proyectos = defineCollection({
       fecha: z.string(),
       estado: z.string(),
       orden: z.number(), // 1 = el primero
+      categorias: z.array(z.enum(TEMAS)).min(1), // Uno o varios temas; sirven para los filtros de la portada
       destacado: z.boolean().default(false),
       color: z.string().default('#13232b'), // Fondo detrás de la captura en la tarjeta (usa un color oscuro)
       tecnologias: z.array(z.string()),

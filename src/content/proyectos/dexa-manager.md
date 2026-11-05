@@ -5,6 +5,7 @@ tipo: Proyecto del bootcamp
 fecha: Mayo 2026 · ampliado en octubre 2026
 estado: Publicado · con web de demo
 orden: 3
+categorias: [autonomos]
 color: "#3a2212"
 tecnologias: [React, Node.js, Express, PostgreSQL, Prisma, Vercel, Vite, React Router, i18next, Zod, JWT, Jest, Supertest, PWA, Neon, GitHub Actions]
 demo: https://dexa-manager-demo.vercel.app

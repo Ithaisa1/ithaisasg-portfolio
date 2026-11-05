@@ -15,6 +15,10 @@ const { lang } = Astro.props;
 const t = textos(lang);
 const { perfil, experiencia, formacion, habilidades, idiomas } = getDatos(lang);
 const proyectos = await getProyectos(lang);
+// Temas que tienen algún proyecto, en el orden de src/i18n.ts, con cuántos hay en cada uno
+const temas = (Object.keys(t.filtro.temas) as (keyof typeof t.filtro.temas)[])
+  .map((id) => ({ id, nombre: t.filtro.temas[id], n: proyectos.filter((p) => p.data.categorias.includes(id)).length }))
+  .filter((x) => x.n > 0);
 const destacado = proyectos.find((p) => p.data.destacado) ?? proyectos[0];
 // Dos proyectos más asoman detrás de la captura principal, como un abanico de cartas
 const atras = proyectos.filter((p) => p.id !== destacado.id).slice(0, 2);
@@ -116,7 +120,25 @@ const personaJsonLd = {
         <p class="label"><b>02</b> {t.sec.proyectos}</p>
         <h2 id="t-proyectos">{t.sec.proyectosTitulo}</h2>
       </div>
-      <div class="grid">
+      {
+        temas.length > 1 && (
+          <>
+            {/* Los filtros solo aparecen si funciona JavaScript; sin él se ven todos los proyectos */}
+            <div class="filtros" role="group" aria-label={t.filtro.etiqueta} data-filtros data-todos={t.filtro.msgTodos} data-uno={t.filtro.msgUno} data-varios={t.filtro.msgVarios} hidden>
+              <button type="button" aria-pressed="true" data-tema="">
+                {t.filtro.todos} <span class="n">{proyectos.length}</span>
+              </button>
+              {temas.map((x) => (
+                <button type="button" aria-pressed="false" data-tema={x.id} data-nombre={x.nombre}>
+                  {x.nombre} <span class="n">{x.n}</span>
+                </button>
+              ))}
+            </div>
+            <p class="visually-hidden" role="status" data-filtro-estado />
+          </>
+        )
+      }
+      <div class="grid" data-grid>
         {proyectos.map((p) => <ProjectCard proyecto={p} lang={lang} />)}
       </div>
       <p class="more">
@@ -255,6 +277,32 @@ const personaJsonLd = {
     </div>
   </section>
 </Base>
+
+<script>
+  // Filtros de proyectos por tema: botones con aria-pressed; el cambio se anuncia en una región «status»
+  const filtros = document.querySelector<HTMLElement>('[data-filtros]');
+  if (filtros) {
+    const botones = [...filtros.querySelectorAll<HTMLButtonElement>('button')];
+    const tarjetas = [...document.querySelectorAll<HTMLElement>('[data-grid] [data-temas]')];
+    const estado = document.querySelector<HTMLElement>('[data-filtro-estado]');
+    filtros.hidden = false;
+    botones.forEach((b) =>
+      b.addEventListener('click', () => {
+        const tema = b.dataset.tema ?? '';
+        botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        let visibles = 0;
+        tarjetas.forEach((c) => {
+          const ver = !tema || (c.dataset.temas ?? '').split(' ').includes(tema);
+          c.hidden = !ver;
+          if (ver) visibles++;
+        });
+        const d = filtros.dataset;
+        const plantilla = !tema ? d.todos : visibles === 1 ? d.uno : d.varios;
+        if (estado) estado.textContent = (plantilla ?? '').replace('{n}', String(visibles)).replace('{tema}', b.dataset.nombre ?? '');
+      }),
+    );
+  }
+</script>
 
 <style>
   /* ---------- Banda de presentación ---------- */
@@ -615,12 +663,57 @@ const personaJsonLd = {
   }
   .grid {
     display: grid;
-    gap: 24px;
+    gap: 20px;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 640px) {
     .grid {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Filtros por tema */
+  .filtros[hidden] {
+    display: none;
+  }
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 24px;
+  }
+  .filtros button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .filtros button:hover {
+    border-color: var(--accent);
+  }
+  .filtros button[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--surface);
+  }
+  .filtros .n {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    opacity: 0.75;
   }
   .more {
     margin: 28px 0 0;
