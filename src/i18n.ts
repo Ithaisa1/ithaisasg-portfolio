@@ -57,6 +57,20 @@ const textos = {
       descargarCv: ' currículum',
     },
     tarjeta: { tecnologias: 'Tecnologías', verFicha: 'Ver ficha del proyecto →' },
+    filtro: {
+      etiqueta: 'Filtrar proyectos por tema',
+      todos: 'Todos',
+      msgTodos: 'Mostrando todos los proyectos ({n})',
+      msgUno: 'Mostrando 1 proyecto de «{tema}»',
+      msgVarios: 'Mostrando {n} proyectos de «{tema}»',
+      temas: {
+        autonomos: 'Autónomos y finanzas',
+        tramites: 'Trámites y administración',
+        comercio: 'Comercio y negocio',
+        educacion: 'Educación y formación',
+        ocio: 'Ocio, viajes y juegos',
+      },
+    },
     ficha: {
       volver: '← Todos los proyectos',
       verWeb: 'Ver la web',
@@ -116,6 +130,20 @@ const textos = {
       descargarCv: ' CV',
     },
     tarjeta: { tecnologias: 'Technologies', verFicha: 'See project details →' },
+    filtro: {
+      etiqueta: 'Filter projects by topic',
+      todos: 'All',
+      msgTodos: 'Showing all projects ({n})',
+      msgUno: 'Showing 1 project in “{tema}”',
+      msgVarios: 'Showing {n} projects in “{tema}”',
+      temas: {
+        autonomos: 'Freelancers and finance',
+        tramites: 'Paperwork and public services',
+        comercio: 'Commerce and business',
+        educacion: 'Education and training',
+        ocio: 'Leisure, travel and games',
+      },
+    },
     ficha: {
       volver: '← All projects',
       verWeb: 'Visit the site',

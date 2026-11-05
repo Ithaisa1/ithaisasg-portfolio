@@ -45,11 +45,12 @@ Lo más cómodo es hacerlo desde el panel, **https://ithaisasg.twincore.es/admin
 1. Guarda una captura en `src/assets/proyectos/` (por ejemplo, 1280 × 800).
 2. Copia uno de los archivos de `src/content/proyectos/` con otro nombre. Ese nombre será la dirección: `mi-proyecto.md` → `/proyectos/mi-proyecto/`.
 3. Cambia los datos de arriba (entre las líneas `---`) y el texto de abajo.
-4. Ejecuta `npm run dev` y revísalo.
+4. Elige su tema en `categorias` (uno o varios; salen en los filtros de la portada). Si necesitas un tema nuevo: añádelo a `TEMAS` en `src/content.config.ts`, a su nombre en `src/i18n.ts` (en los dos idiomas) y a la lista de `public/admin/config.yml`.
+5. Ejecuta `npm run dev` y revísalo.
 
 ### Cambiar el orden de los proyectos
 
-Cambia el número `orden` de cada archivo (1 = primero). El que tenga `destacado: true` ocupa todo el ancho y sale en la portada.
+Cambia el número `orden` de cada archivo (1 = primero). El que tenga `destacado: true` es el que se ve grande en la presentación de la portada.
 
 ### Añadir el CV en PDF
 

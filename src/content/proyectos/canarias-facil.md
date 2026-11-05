@@ -5,6 +5,7 @@ tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Versión 1.0 publicada · pendiente de pruebas con usuarios
 orden: 1
+categorias: [tramites]
 destacado: true
 color: "#0b5470"
 tecnologias: [Astro, TypeScript, Tailwind CSS, React, Zod, Vitest, Playwright, GitHub Actions, Vercel]

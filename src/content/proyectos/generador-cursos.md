@@ -5,6 +5,7 @@ tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Demo pública · versión completa en desarrollo
 orden: 8
+categorias: [educacion]
 color: "#12263a"
 tecnologias: [React, TypeScript, Vite, Node.js, Fastify, PostgreSQL, Zod, TipTap, Gemini API, Vitest, GitHub Actions]
 demo: https://ithaisasg.twincore.es/demos/generador-cursos/

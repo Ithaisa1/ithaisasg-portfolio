@@ -5,6 +5,7 @@ tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Terminado · preparado para la venta
 orden: 6
+categorias: [comercio, educacion]
 color: "#22302a"
 tecnologias: [HTML, CSS, JavaScript, Diseño responsive]
 demo: https://ithaisasg.twincore.es/demos/kit/restaurante/

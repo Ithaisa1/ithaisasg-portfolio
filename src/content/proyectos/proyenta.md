@@ -5,6 +5,7 @@ tipo: Proyecto personal
 fecha: Octubre 2026
 estado: Publicado · versión Premium de pago en preparación
 orden: 2
+categorias: [autonomos]
 color: "#123d2b"
 tecnologias: [React, TypeScript, Vite, Tailwind CSS, React Router, Supabase, PostgreSQL, React PDF, Vitest, Testing Library, PWA, Cloudflare Turnstile, Vercel]
 demo: https://proyenta.vercel.app

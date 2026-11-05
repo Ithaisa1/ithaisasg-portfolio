@@ -59,11 +59,23 @@ collections:
         value_type: int
         min: 1
         hint: 1 = el primero de la lista.
+      - name: categorias
+        label: Temas
+        widget: select
+        multiple: true
+        min: 1
+        options:
+          - { label: Autónomos y finanzas, value: autonomos }
+          - { label: Trámites y administración, value: tramites }
+          - { label: Comercio y negocio, value: comercio }
+          - { label: Educación y formación, value: educacion }
+          - { label: 'Ocio, viajes y juegos', value: ocio }
+        hint: Para qué sirve el proyecto. Se usa en los filtros de la portada; puede tener más de uno.
       - name: destacado
         label: Destacado
         widget: boolean
         default: false
-        hint: Si está activado, ocupa todo el ancho en la portada. Mejor solo uno.
+        hint: Es el proyecto que se ve grande en la presentación de la portada. Mejor solo uno.
       - name: color
         label: Color de fondo de la tarjeta
         widget: color

@@ -5,6 +5,7 @@ tipo: Proyecto individual
 fecha: Abril 2026
 estado: Terminado
 orden: 7
+categorias: [ocio]
 color: "#3b2a6b"
 tecnologias: [React, Vite, React Router, Context API, CSS Modules, Vitest, Testing Library, Vercel]
 demo: https://game-scape-mu.vercel.app
