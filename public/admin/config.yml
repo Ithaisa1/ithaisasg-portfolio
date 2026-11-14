@@ -103,7 +103,7 @@ collections:
           - { name: titulo, label: Título, widget: string }
           - { name: subtitulo, label: Subtítulo, widget: string }
           - { name: ubicacion, label: Ubicación, widget: string }
-          - { name: disponibilidad, label: Disponibilidad, widget: string, hint: 'Empieza por «Disponible…». También se usa en el bloque de contacto.' }
+          - { name: disponibilidad, label: Disponibilidad, widget: string, required: false, hint: 'Opcional: si lo dejas vacío no se muestra. Empieza por «Disponible…». También se usa en el bloque de contacto.' }
           - { name: presentacion, label: Presentación, widget: text }
           - name: destacados
             label: Datos destacados (debajo de la presentación)
@@ -246,7 +246,7 @@ collections:
           - { name: titulo, label: Título, widget: string }
           - { name: subtitulo, label: Subtítulo, widget: string }
           - { name: ubicacion, label: Ubicación, widget: string }
-          - { name: disponibilidad, label: Disponibilidad, widget: string, hint: 'Empieza por «Disponible…». También se usa en el bloque de contacto.' }
+          - { name: disponibilidad, label: Disponibilidad, widget: string, required: false, hint: 'Opcional: si lo dejas vacío no se muestra. Empieza por «Disponible…». También se usa en el bloque de contacto.' }
           - { name: presentacion, label: Presentación, widget: text }
           - name: destacados
             label: Datos destacados (debajo de la presentación)

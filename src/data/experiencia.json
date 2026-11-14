@@ -1,16 +1,22 @@
 {
   "puestos": [
     {
-      "fechas": "jul 2026 – ene 2027",
+      "fechas": "jul – nov 2026",
       "puesto": "Desarrolladora web",
       "empresa": "Qraneos",
       "tipo": "Contrato de formación en alternancia",
       "actual": true,
       "tareas": [
-        "Katas de programación en JavaScript.",
-        "Web scraping con TypeScript.",
-        "Documentación técnica y scripts de apoyo en un proyecto en equipo.",
-        "Trabajo en equipo con Git y GitLab (ramas, commits y merge requests) y seguimiento de tareas en Jira."
+        "Desarrollo web con TypeScript y Node.js.",
+        "Automatización de procesos y herramientas.",
+        "Configuración de entornos con Docker y Supabase.",
+        "Gestión de código con Git y GitLab.",
+        "Ejecución de pruebas automatizadas.",
+        "Análisis y resolución de incidencias técnicas.",
+        "Revisión de permisos y seguridad.",
+        "Documentación técnica y de calidad.",
+        "Revisión por pares y trabajo en equipo.",
+        "Gestión de tareas mediante metodologías ágiles."
       ]
     },
     {
