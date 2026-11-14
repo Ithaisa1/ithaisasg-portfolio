@@ -20,6 +20,7 @@ export type Perfil = {
   titulo: string;
   subtitulo: string;
   ubicacion: string;
+  // Vacío = no se muestra (ni en la portada ni en el bloque de contacto).
   disponibilidad: string;
   presentacion: string;
   destacados: { etiqueta: string; texto: string; detalle: string }[];

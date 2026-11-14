@@ -44,7 +44,7 @@ const personaJsonLd = {
     <div class="deco" aria-hidden="true"><span class="ring"></span><span class="sun"></span></div>
     <div class="wrap hero">
       <div class="intro">
-        <p class="status"><span class="dot" aria-hidden="true"></span>{perfil.disponibilidad}</p>
+        {perfil.disponibilidad && <p class="status"><span class="dot" aria-hidden="true"></span>{perfil.disponibilidad}</p>}
         <h1 id="titulo">
           {perfil.nombre}
           <span class="role">{perfil.titulo}</span>
@@ -244,7 +244,7 @@ const personaJsonLd = {
           <p class="label"><b>06</b> {t.sec.contacto}</p>
           <h2 id="t-contacto">{t.sec.contactoTitulo}</h2>
           <p>
-            {perfil.busco} {t.sec.estoy} {perfil.disponibilidad.charAt(0).toLowerCase() + perfil.disponibilidad.slice(1)}.
+            {perfil.busco}{perfil.disponibilidad && ` ${t.sec.estoy} ${perfil.disponibilidad.charAt(0).toLowerCase() + perfil.disponibilidad.slice(1)}.`}
           </p>
         </div>
         <ul class="clist">

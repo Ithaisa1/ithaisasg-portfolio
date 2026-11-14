@@ -1,16 +1,22 @@
 {
   "puestos": [
     {
-      "fechas": "Jul 2026 – Jan 2027",
+      "fechas": "Jul – Nov 2026",
       "puesto": "Web developer",
       "empresa": "Qraneos",
       "tipo": "Work-study training contract",
       "actual": true,
       "tareas": [
-        "Coding katas in JavaScript.",
-        "Web scraping with TypeScript.",
-        "Technical documentation and support scripts for a team project.",
-        "Teamwork with Git and GitLab (branches, commits and merge requests) and task tracking in Jira."
+        "Web development with TypeScript and Node.js.",
+        "Automation of processes and tools.",
+        "Environment setup with Docker and Supabase.",
+        "Code management with Git and GitLab.",
+        "Running automated tests.",
+        "Analysis and resolution of technical issues.",
+        "Review of permissions and security.",
+        "Technical and quality documentation.",
+        "Peer review and teamwork.",
+        "Task management with agile methodologies."
       ]
     },
     {
