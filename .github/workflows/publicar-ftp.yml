@@ -46,8 +46,10 @@ jobs:
           esac
 
       - name: Subir a Piensa por SFTP
-        # Si el servidor no responde, mejor fallar que quedarse colgado
-        timeout-minutes: 10
+        # Si el servidor no responde, mejor fallar que quedarse colgado.
+        # Se sube todo el sitio cada vez (la demo de Guanxe son +1.200 archivos) y ya tarda
+        # más de 10 minutos, así que el límite es de 30.
+        timeout-minutes: 30
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
