@@ -250,11 +250,17 @@ const personaJsonLd = {
         <ul class="clist">
           <li class="crow">
             <span><small>{t.contacto.email}</small><a href={`mailto:${perfil.contacto.email}`}>{perfil.contacto.email}</a></span>
-            <CopyButton value={perfil.contacto.email} label={t.contacto.copiarEmail} lang={lang} />
+            <div class="acciones">
+              <CopyButton value={perfil.contacto.email} label={t.contacto.copiarEmail} lang={lang} />
+              <a class="go" href={`mailto:${perfil.contacto.email}`}>{t.contacto.enviarEmail}</a>
+            </div>
           </li>
           <li class="crow">
             <span><small>{t.contacto.telefono}</small><a href={`tel:${perfil.contacto.telefono.replaceAll(' ', '')}`}>{perfil.contacto.telefono}</a></span>
-            <CopyButton value={perfil.contacto.telefono.replaceAll(' ', '')} label={t.contacto.copiarTelefono} lang={lang} />
+            <div class="acciones">
+              <CopyButton value={perfil.contacto.telefono.replaceAll(' ', '')} label={t.contacto.copiarTelefono} lang={lang} />
+              <a class="go" href={`https://wa.me/${perfil.contacto.telefono.replace(/\D/g, '')}`} target="_blank" rel="noopener">{t.contacto.whatsapp}<span class="visually-hidden">{t.contacto.otraPestana}</span></a>
+            </div>
           </li>
           <li class="crow">
             <span><small>LinkedIn</small>linkedin.com/in/ithaisa-sg</span>
@@ -984,6 +990,19 @@ const personaJsonLd = {
     font-size: 0.86rem;
     overflow-wrap: anywhere;
     min-width: 0;
+  }
+  /* Dos botones por fila (copiar + enviar); en pantallas estrechas pasan debajo del texto */
+  .crow {
+    flex-wrap: wrap;
+  }
+  .crow > span {
+    flex: 1 1 17rem;
+  }
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-left: auto;
   }
   .crow a:not(.go) {
     text-decoration: none;

@@ -51,7 +51,7 @@ const t = textos(lang).contacto;
         }, 1800);
       } catch {
         // Sin permiso para el portapapeles: seleccionamos el texto
-        const text = btn.parentElement?.querySelector('span > a');
+        const text = btn.closest('.crow')?.querySelector('span > a');
         if (text) {
           const range = document.createRange();
           range.selectNodeContents(text);
