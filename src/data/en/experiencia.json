@@ -5,7 +5,6 @@
       "puesto": "Web developer",
       "empresa": "Qraneos",
       "tipo": "Work-study training contract",
-      "actual": true,
       "tareas": [
         "Web development with TypeScript and Node.js.",
         "Automation of processes and tools.",
