@@ -5,7 +5,6 @@
       "puesto": "Desarrolladora web",
       "empresa": "Qraneos",
       "tipo": "Contrato de formación en alternancia",
-      "actual": true,
       "tareas": [
         "Desarrollo web con TypeScript y Node.js.",
         "Automatización de procesos y herramientas.",
